@@ -28,6 +28,14 @@ struct ContentView: View {
                 .onTapGesture {
                     showingCameraPicker.toggle()
                 }
+            Text("Detect")
+                .onTapGesture {
+                    if(image != nil) {
+                        do{
+                            try SealDetector.detect(image: image!)
+                        }catch{}
+                    }
+                }
         }.sheet(isPresented:$showingImagePicker) {
             ImagePickerView(image: $image, sourceType: .library)
         }.sheet(isPresented:$showingCameraPicker) {

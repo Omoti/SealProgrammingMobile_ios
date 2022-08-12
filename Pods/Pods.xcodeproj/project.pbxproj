@@ -121,7 +121,7 @@
 		8E208B005A25C730048DD09F540A1CD0 /* image_segmenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = image_segmenter.h; path = tensorflow_lite_support/c/task/vision/image_segmenter.h; sourceTree = "<group>"; };
 		931FD1B922C9DFF2EC5EF0218D4EF5B7 /* Pods-SealProgrammingMobile-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SealProgrammingMobile-acknowledgements.markdown"; sourceTree = "<group>"; };
 		963E92FFF03E7824EF67C1F0B74FE29A /* Pods-SealProgrammingMobile */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SealProgrammingMobile"; path = Pods_SealProgrammingMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A12246B48920B0F5B620CC2958057E2D /* TFLSegmentationResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TFLSegmentationResult.h; path = tensorflow_lite_support/ios/task/processor/sources/TFLSegmentationResult.h; sourceTree = "<group>"; };
 		A33069303490930782C34407F5795FAF /* segmentation_result.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = segmentation_result.h; path = tensorflow_lite_support/c/task/processor/segmentation_result.h; sourceTree = "<group>"; };
 		A4D5E2BE0AF69D28C35968566C968F11 /* TensorFlowLiteTaskVisionC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TensorFlowLiteTaskVisionC.framework; path = Frameworks/TensorFlowLiteTaskVisionC.framework; sourceTree = "<group>"; };
@@ -245,7 +245,6 @@
 				E1B526830E989A997CA40C883CC62821 /* Frameworks */,
 				4174979536552F73CE2454DD146EBC21 /* Support Files */,
 			);
-			name = TensorFlowLiteTaskVision;
 			path = TensorFlowLiteTaskVision;
 			sourceTree = "<group>";
 		};
@@ -412,6 +411,7 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
 			};
