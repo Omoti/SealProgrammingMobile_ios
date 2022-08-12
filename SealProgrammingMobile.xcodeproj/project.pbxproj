@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		126207140062A83E3A217039 /* Pods_SealProgrammingMobile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8D5736267ECB38B8BE73CB6 /* Pods_SealProgrammingMobile.framework */; };
 		67036D7828A4D95D009E5480 /* SealProgrammingMobileApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67036D7728A4D95D009E5480 /* SealProgrammingMobileApp.swift */; };
 		67036D7A28A4D95D009E5480 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67036D7928A4D95D009E5480 /* ContentView.swift */; };
 		67036D7C28A4D965009E5480 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 67036D7B28A4D965009E5480 /* Assets.xcassets */; };
@@ -22,6 +23,9 @@
 		67036D7E28A4D965009E5480 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		67036D8528A5F4C1009E5480 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		67036D8628A61345009E5480 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		B6287EAA0DA1B44B7CAD1FBA /* Pods-SealProgrammingMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SealProgrammingMobile.release.xcconfig"; path = "Target Support Files/Pods-SealProgrammingMobile/Pods-SealProgrammingMobile.release.xcconfig"; sourceTree = "<group>"; };
+		B8D5736267ECB38B8BE73CB6 /* Pods_SealProgrammingMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SealProgrammingMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E73F4DED78734F482E825303 /* Pods-SealProgrammingMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SealProgrammingMobile.debug.xcconfig"; path = "Target Support Files/Pods-SealProgrammingMobile/Pods-SealProgrammingMobile.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +33,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				126207140062A83E3A217039 /* Pods_SealProgrammingMobile.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1EC56C5B80CE630FFB7FD5A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B8D5736267ECB38B8BE73CB6 /* Pods_SealProgrammingMobile.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		67036D6B28A4D95D009E5480 = {
 			isa = PBXGroup;
 			children = (
 				67036D7628A4D95D009E5480 /* SealProgrammingMobile */,
 				67036D7528A4D95D009E5480 /* Products */,
+				A7B83A630133302A7EF8E1D6 /* Pods */,
+				1EC56C5B80CE630FFB7FD5A5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,6 +87,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		A7B83A630133302A7EF8E1D6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E73F4DED78734F482E825303 /* Pods-SealProgrammingMobile.debug.xcconfig */,
+				B6287EAA0DA1B44B7CAD1FBA /* Pods-SealProgrammingMobile.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -79,6 +104,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 67036D8228A4D965009E5480 /* Build configuration list for PBXNativeTarget "SealProgrammingMobile" */;
 			buildPhases = (
+				0802BA856C428D4909A5FB4E /* [CP] Check Pods Manifest.lock */,
 				67036D7028A4D95D009E5480 /* Sources */,
 				67036D7128A4D95D009E5480 /* Frameworks */,
 				67036D7228A4D95D009E5480 /* Resources */,
@@ -136,6 +162,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0802BA856C428D4909A5FB4E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SealProgrammingMobile-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		67036D7028A4D95D009E5480 /* Sources */ = {
@@ -267,6 +318,7 @@
 		};
 		67036D8328A4D965009E5480 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E73F4DED78734F482E825303 /* Pods-SealProgrammingMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -297,6 +349,7 @@
 		};
 		67036D8428A4D965009E5480 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6287EAA0DA1B44B7CAD1FBA /* Pods-SealProgrammingMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
