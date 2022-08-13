@@ -12,30 +12,30 @@ struct ImagePickerView: UIViewControllerRepresentable {
     }
     var sourceType: SourceType
     var allowsEditing: Bool = false
-
+    
     class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
         let parent: ImagePickerView
-
+        
         init(_ parent: ImagePickerView) {
             self.parent = parent
         }
-
+        
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
             if let image = info[.editedImage] as? UIImage {
                 parent.image = image
             } else if let image = info[.originalImage] as? UIImage {
                 let resizedImage = image.resized(withPercentage: 1.0)
-
+                
                 parent.image = resizedImage
             }
             parent.presentationMode.wrappedValue.dismiss()
         }
     }
-
+    
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
     }
-
+    
     func makeUIViewController(context: Context) -> UIImagePickerController {
         let viewController = UIImagePickerController()
         viewController.delegate = context.coordinator
@@ -48,7 +48,7 @@ struct ImagePickerView: UIViewControllerRepresentable {
         viewController.allowsEditing = allowsEditing
         return viewController
     }
-
+    
     func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {
     }
 }
