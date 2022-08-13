@@ -24,7 +24,9 @@ struct ImagePickerView: UIViewControllerRepresentable {
             if let image = info[.editedImage] as? UIImage {
                 parent.image = image
             } else if let image = info[.originalImage] as? UIImage {
-                parent.image = image
+                let resizedImage = image.resized(withPercentage: 1.0)
+
+                parent.image = resizedImage
             }
             parent.presentationMode.wrappedValue.dismiss()
         }
@@ -51,3 +53,12 @@ struct ImagePickerView: UIViewControllerRepresentable {
     }
 }
 
+extension UIImage {
+    //データサイズを変更する
+    func resized(withPercentage percentage: CGFloat) -> UIImage? {
+        let canvas = CGSize(width: size.width * percentage, height: size.height * percentage)
+        return UIGraphicsImageRenderer(size: canvas, format: imageRendererFormat).image {
+            _ in draw(in: CGRect(origin: .zero, size: canvas))
+        }
+    }
+}
