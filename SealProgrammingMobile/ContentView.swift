@@ -15,14 +15,16 @@ struct ContentView: View {
     @State var detectionResult: DetectionResult?
     
     var body: some View {
-        VStack {
+        VStack() {
             ZStack{
                 if let image = pickedImage {
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .background(Color.gray)
+                        .frame(maxHeight: .infinity)
                 }else{
-                    Image(uiImage: UIImage())
+                    Spacer()
                 }
                 if let detectionResult = detectionResult {
                     DetectionResultView(detections: detectionResult.detections, imageSize: pickedImage!.size)
@@ -32,10 +34,12 @@ struct ContentView: View {
                 .onTapGesture {
                     showingImagePicker.toggle()
                 }
+            Spacer().frame(height: 10)
             Text("Camera")
                 .onTapGesture {
                     showingCameraPicker.toggle()
                 }
+            Spacer().frame(height: 10)
             Text("Detect")
                 .onTapGesture {
                     if(pickedImage != nil) {
