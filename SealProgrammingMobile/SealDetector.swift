@@ -7,10 +7,16 @@ struct SealDetector{
     static func detect(image: UIImage) -> DetectionResult? {
         // Initialization
         guard let modelPath = Bundle.main.path(forResource: "seals_model",
-                                                    ofType: "tflite") else { return nil }
+                                                    ofType: "tflite")
+        else {
+            print("Failed to load the model file with name: seals_model.")
+            return nil
+            
+        }
 
         let options = ObjectDetectorOptions(modelPath: modelPath)
-
+        options.classificationOptions.scoreThreshold = 0.5
+        
         do{
             // Configure any additional options:
             // options.classificationOptions.maxResults = 3
