@@ -29,6 +29,15 @@ struct DetectionResultView: View {
                                       width: boxWidth,
                                       height: boxHeight)),
                                with: .color(.blue))
+                
+                guard let category = detection.categories.first  else {continue}
+                let score = String(format: "%.2f", category.score)
+                context.draw(Text((category.label ?? "") + "(" + score + ")")
+                    .font(.footnote)
+                    .foregroundColor(.blue)
+                             , at: CGPoint(x: x, y: y)
+                    
+                )
             }
         }
     }
