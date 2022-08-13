@@ -15,7 +15,7 @@ struct SealDetector{
         }
 
         let options = ObjectDetectorOptions(modelPath: modelPath)
-        options.classificationOptions.scoreThreshold = 0.5
+        options.classificationOptions.scoreThreshold = 0.4
         
         do{
             // Configure any additional options:
