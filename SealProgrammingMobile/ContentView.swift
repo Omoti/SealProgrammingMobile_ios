@@ -6,19 +6,25 @@
 //
 
 import SwiftUI
+import TensorFlowLiteTaskVision
 
 struct ContentView: View {
     @State var showingImagePicker = false
     @State var showingCameraPicker = false
     @State var image: UIImage?
+    @State var detectionResult: DetectionResult?
     
     var body: some View {
         VStack {
-            if let image = image {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                
+            ZStack{
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
+                if let detectionResult = detectionResult {
+                    DetectionResultView(detections: detectionResult.detections)
+                }
             }
             Text("Image")
                 .onTapGesture {
@@ -31,9 +37,7 @@ struct ContentView: View {
             Text("Detect")
                 .onTapGesture {
                     if(image != nil) {
-                        do{
-                            try SealDetector.detect(image: image!)
-                        }catch{}
+                        detectionResult = SealDetector.detect(image: image!)
                     }
                 }
         }.sheet(isPresented:$showingImagePicker) {
