@@ -17,6 +17,7 @@
 		67036D8D28A62E1F009E5480 /* seals_model.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 67036D8C28A62E1F009E5480 /* seals_model.tflite */; };
 		67036D9528A717ED009E5480 /* DetectionResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67036D9428A717ED009E5480 /* DetectionResultView.swift */; };
 		67036D9728A7AF8A009E5480 /* efficientdet_lite0.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 67036D9628A7AF8A009E5480 /* efficientdet_lite0.tflite */; };
+		67036D9B28A8558D009E5480 /* DeviceScanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67036D9A28A8558D009E5480 /* DeviceScanView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		67036D8C28A62E1F009E5480 /* seals_model.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; name = seals_model.tflite; path = assetes/seals_model.tflite; sourceTree = "<group>"; };
 		67036D9428A717ED009E5480 /* DetectionResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionResultView.swift; sourceTree = "<group>"; };
 		67036D9628A7AF8A009E5480 /* efficientdet_lite0.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; name = efficientdet_lite0.tflite; path = assetes/efficientdet_lite0.tflite; sourceTree = "<group>"; };
+		67036D9A28A8558D009E5480 /* DeviceScanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceScanView.swift; sourceTree = "<group>"; };
 		B6287EAA0DA1B44B7CAD1FBA /* Pods-SealProgrammingMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SealProgrammingMobile.release.xcconfig"; path = "Target Support Files/Pods-SealProgrammingMobile/Pods-SealProgrammingMobile.release.xcconfig"; sourceTree = "<group>"; };
 		B8D5736267ECB38B8BE73CB6 /* Pods_SealProgrammingMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SealProgrammingMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E73F4DED78734F482E825303 /* Pods-SealProgrammingMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SealProgrammingMobile.debug.xcconfig"; path = "Target Support Files/Pods-SealProgrammingMobile/Pods-SealProgrammingMobile.debug.xcconfig"; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				67036D8628A61345009E5480 /* ImagePickerView.swift */,
 				67036D7B28A4D965009E5480 /* Assets.xcassets */,
 				67036D7D28A4D965009E5480 /* Preview Content */,
+				67036D9A28A8558D009E5480 /* DeviceScanView.swift */,
 			);
 			path = SealProgrammingMobile;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				67036D8B28A629D5009E5480 /* SealDetector.swift in Sources */,
 				67036D7A28A4D95D009E5480 /* ContentView.swift in Sources */,
 				67036D9528A717ED009E5480 /* DetectionResultView.swift in Sources */,
+				67036D9B28A8558D009E5480 /* DeviceScanView.swift in Sources */,
 				67036D8728A61345009E5480 /* ImagePickerView.swift in Sources */,
 				67036D7828A4D95D009E5480 /* SealProgrammingMobileApp.swift in Sources */,
 			);

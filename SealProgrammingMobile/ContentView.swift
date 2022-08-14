@@ -11,6 +11,8 @@ import TensorFlowLiteTaskVision
 struct ContentView: View {
     @State var showingImagePicker = false
     @State var showingCameraPicker = false
+    @State var showingDeviceScanView = false
+
     @State var pickedImage: UIImage?
     @State var detectionResult: DetectionResult?
     
@@ -46,10 +48,17 @@ struct ContentView: View {
                         detectionResult = SealDetector.detect(image: pickedImage!)
                     }
                 }
+            Spacer().frame(height: 10)
+            Text("Connect")
+                .onTapGesture {
+                    showingDeviceScanView = true
+                }
         }.sheet(isPresented:$showingImagePicker) {
             ImagePickerView(image: $pickedImage, sourceType: .library)
         }.sheet(isPresented:$showingCameraPicker) {
             ImagePickerView(image: $pickedImage, sourceType: .camera)
+        }.sheet(isPresented: $showingDeviceScanView) {
+            DeviceScanView()
         }
     }
 }
