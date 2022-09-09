@@ -1,11 +1,10 @@
 import SwiftUI
 
-
 struct DeviceScanView: View {
     @StateObject var deviceManger: DeviceManager = DeviceManager()
     
     var body: some View {
-        ZStack {
+        List(){
             if(!deviceManger.isSearching){
                 Button(action: {
                     deviceManger.startScan()
@@ -21,6 +20,10 @@ struct DeviceScanView: View {
                         .font(.largeTitle)
                 }
             }
+            ForEach(deviceManger.foundPeripherals, id: \.self) { peripheral in
+                Text(peripheral.name)
+            }
         }
+        
     }
 }
