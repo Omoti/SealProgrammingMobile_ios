@@ -9,6 +9,7 @@ class DeviceManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
     private var currentPeripheral: CBPeripheral? = nil
     private let serviceUUID: [CBUUID] = [CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")]
     private let characteristicUUID: [CBUUID] = [CBUUID(string: "6E400002-B5A3-F393-E0A9-E50E24DCCA9E")] //RX
+    private var writeData: String = ""
     
     func startScan() {
         foundPeripherals.removeAll()
@@ -27,6 +28,15 @@ class DeviceManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
         currentPeripheral = peripheral.peripheral
         centralManager.connect(currentPeripheral!)
         stopScan()
+    }
+    
+    func write(data: String){
+        let service: CBService? = currentPeripheral?.services?.first
+        
+        if(service != nil){
+            writeData = data
+            currentPeripheral!.discoverCharacteristics(characteristicUUID, for: service!)
+        }
     }
     
     func centralManagerDidUpdateState(_ central: CBCentralManager){
@@ -90,6 +100,18 @@ class DeviceManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
         }
         else{
             print(error!)
+        }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
+        for i in service.characteristics!{
+            switch(i.uuid.uuidString){
+            case characteristicUUID.first?.uuidString:
+                peripheral.writeValue(writeData.data(using: .utf8)! , for: i, type: .withResponse)
+                break
+            default:
+                break
+            }
         }
     }
 }

@@ -21,9 +21,19 @@ struct DeviceScanView: View {
                 }
             }
             ForEach(deviceManger.foundPeripherals, id: \.self) { peripheral in
-                Text(peripheral.name).onTapGesture {
-                    deviceManger.connect(peripheral: peripheral)
+                HStack{
+                    Text(peripheral.name)
+                    Button(action: {
+                        deviceManger.connect(peripheral: peripheral)
+                    }) {
+                        Text("Connect")
+                    }
                 }
+            }
+            Button(action: {
+                deviceManger.write(data: "hoge")
+            }) {
+                Text("Write")
             }
         }
     }
