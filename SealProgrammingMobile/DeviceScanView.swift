@@ -1,10 +1,26 @@
 import SwiftUI
 
+
 struct DeviceScanView: View {
+    @StateObject var deviceManger: DeviceManager = DeviceManager()
+    
     var body: some View {
         ZStack {
-            Color(.green)
-            Text("DeviceScanView")
+            if(!deviceManger.isSearching){
+                Button(action: {
+                    deviceManger.startScan()
+                }){
+                    Text("Scan")
+                        .font(.largeTitle)
+                }
+            }else{
+                Button(action: {
+                    deviceManger.stopScan()
+                }){
+                    Text("Stop")
+                        .font(.largeTitle)
+                }
+            }
         }
     }
 }
