@@ -21,9 +21,10 @@ struct DeviceScanView: View {
                 }
             }
             ForEach(deviceManger.foundPeripherals, id: \.self) { peripheral in
-                Text(peripheral.name)
+                Text(peripheral.name).onTapGesture {
+                    deviceManger.connect(peripheral: peripheral)
+                }
             }
         }
-        
     }
 }
