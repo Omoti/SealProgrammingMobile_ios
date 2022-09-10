@@ -17,10 +17,15 @@ struct MainScreenView: View{
                     Image(uiImage: image)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .background(Color.gray)
+                        .background(Color.white)
                         .frame(maxHeight: .infinity)
                 }else{
-                    Spacer().background(Color.white)
+                    VStack{
+                        Spacer()
+                        Text("シールプログラミングへようこそ")
+                        Spacer()
+                    }.background(Color.white)
+                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                 }
                 if let detectionResult = detectionResult {
                     DetectionResultView(detections: detectionResult.detections, imageSize: pickedImage!.size)
@@ -35,7 +40,8 @@ struct MainScreenView: View{
                     label: "とる",
                     color: Color.blue,
                     action: {
-                        showingCameraPicker.toggle()
+                        // showingCameraPicker.toggle()
+                        showingImagePicker.toggle()
                     }
                 )
                 Spacer()
@@ -57,8 +63,7 @@ struct MainScreenView: View{
                     }
                 )
                 Spacer()
-            }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, alignment: .center)
-                .padding(20)
+            }
         }.sheet(isPresented:$showingImagePicker) {
             ImagePickerView(image: $pickedImage, sourceType: .library)
         }.sheet(isPresented:$showingCameraPicker) {
@@ -66,6 +71,7 @@ struct MainScreenView: View{
         }.sheet(isPresented: $showingDeviceScanView) {
             DeviceScanView()
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+            .background(Color("ControlBackgroundColor"))
     }
 }
 
