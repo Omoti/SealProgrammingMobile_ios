@@ -1,22 +1,16 @@
-//
-//  ContentView.swift
-//  SealProgrammingMobile
-//
-//  Created by 坂口智典 on 2022/08/11.
-//
-
+import Foundation
 import SwiftUI
 import TensorFlowLiteTaskVision
 
-struct ContentView: View {
+struct MainScreenView: View{
     @State var showingImagePicker = false
     @State var showingCameraPicker = false
     @State var showingDeviceScanView = false
-
+    
     @State var pickedImage: UIImage?
     @State var detectionResult: DetectionResult?
     
-    var body: some View {
+    var body:some View{
         VStack() {
             ZStack{
                 if let image = pickedImage {
@@ -65,6 +59,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        MainScreenView()
     }
 }
