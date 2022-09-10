@@ -30,30 +30,30 @@ struct MainScreenView: View{
             Spacer()
             HStack(alignment: .center){
                 Spacer()
-                Button(
+                CircleButton(
+                    image: Image(systemName: "camera.fill"),
+                    label: "とる",
+                    color: Color.blue,
                     action: {
                         showingCameraPicker.toggle()
-                    },
-                    label: {
-                        Text("カメラ")
                     }
                 )
                 Spacer()
-                Button(
+                CircleButton(
+                    image: Image(systemName: "camera.fill"),
+                    label: "つなぐ",
+                    color: Color.blue,
                     action: {
                         showingDeviceScanView = true
-                    },
-                    label: {
-                        Text("つなぐ")
                     }
                 )
                 Spacer()
-                Button(
+                CircleButton(
+                    image:Image(systemName: "car.fill"),
+                    label: "おくる",
+                    color: Color.orange,
                     action: {
-                        // TODO : コマンドを送信
-                    },
-                    label: {
-                        Text("おくる")
+                        // TODO : プログラムをおくる
                     }
                 )
                 Spacer()
