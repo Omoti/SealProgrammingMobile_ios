@@ -40,7 +40,7 @@ struct MainScreenView: View{
                 )
                 Spacer()
                 CircleButton(
-                    image: Image(systemName: "camera.fill"),
+                    image: Image("BluetoothIconDefault"),
                     label: "つなぐ",
                     color: Color.blue,
                     action: {

@@ -13,8 +13,12 @@ struct CircleButton: View{
         ){
             VStack{
                 image
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundColor(.white)
+                    .scaledToFit()
+                    .frame(width: 25, height: 25, alignment: .bottom)
                 Text(label)
-                    .padding(1)
             }.frame(width: 60, height: 60, alignment: .center)
                 .padding(10)
                 .background(color)
