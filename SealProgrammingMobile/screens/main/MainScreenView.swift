@@ -39,7 +39,7 @@ struct MainScreenView: View{
                     CircleButton(
                         image: Image(systemName: "camera.fill"),
                         label: "とる",
-                        color: Color.blue,
+                        color: Color("PrimaryColor"),
                         action: {
                             // showingCameraPicker.toggle()
                             showingImagePicker.toggle()
@@ -49,7 +49,7 @@ struct MainScreenView: View{
                     CircleButton(
                         image: Image("BluetoothIconDefault"),
                         label: "つなぐ",
-                        color: Color.blue,
+                        color: Color("PrimaryColor"),
                         action: {
                             showingDeviceScanView = true
                         }
@@ -58,7 +58,7 @@ struct MainScreenView: View{
                     CircleButton(
                         image:Image(systemName: "car.fill"),
                         label: "おくる",
-                        color: Color.orange,
+                        color: Color("SecondaryColor"),
                         action: {
                             // TODO : プログラムをおくる
                         }
