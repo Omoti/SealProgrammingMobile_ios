@@ -3,6 +3,8 @@ import SwiftUI
 import TensorFlowLiteTaskVision
 
 struct MainScreenView: View{
+    @EnvironmentObject private var deviceManager :DeviceManager
+    
     @State var showingImagePicker = false
     @State var showingCameraPicker = false
     @State var showingDeviceScanView = false
@@ -70,7 +72,7 @@ struct MainScreenView: View{
             }.sheet(isPresented:$showingCameraPicker) {
                 ImagePickerView(image: $pickedImage, sourceType: .camera)
             }.sheet(isPresented: $showingDeviceScanView) {
-                DeviceScanView()
+                DeviceScanView().environmentObject(deviceManager)
             }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 .background(Color("ControlBackgroundColor"))
                 .navigationBarTitle("シールプログラミング")
