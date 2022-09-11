@@ -56,7 +56,9 @@ class DeviceManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
         let peripheralName = advertisementData[CBAdvertisementDataLocalNameKey] as? String ?? nil
         var _name = "NoName"
         
-        if peripheralName != nil {
+        if peripheralName == nil {
+            return // 名前がないものは無視する
+        }else if peripheralName != nil {
             _name = String(peripheralName!)
         } else if peripheral.name != nil {
             _name = String(peripheral.name!)
