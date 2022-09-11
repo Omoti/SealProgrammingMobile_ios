@@ -4,7 +4,8 @@ import TensorFlowLiteTaskVision
 struct DetectionResultView: View {
     let detections: [Detection]
     let imageSize: CGSize
-
+    var showScore: Bool = false
+    
     var body: some View {
         Canvas { context, size in
             let safeAreaWidth = size.width
@@ -28,14 +29,18 @@ struct DetectionResultView: View {
                                            y: y,
                                            width: boxWidth,
                                            height: boxHeight)),
-                               with: .color(.blue))
+                               with: .color(.yellow))
                 
                 guard let category = detection.categories.first  else {continue}
                 let seal = SealConverter.LabelToSeal(label: category.label ?? "")
                 let score = String(format: "%.2f", category.score)
-                context.draw(Text(seal.text + "(" + score + ")")
+                var text: String  = seal.text
+                if showScore {
+                    text += "(" + score + ")"
+                }
+                context.draw(Text(text)
                     .font(.footnote)
-                    .foregroundColor(.blue)
+                    .foregroundColor(.yellow)
                 , at: CGPoint(x: x, y: y)
                 
                 )
