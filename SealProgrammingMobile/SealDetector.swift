@@ -33,7 +33,22 @@ struct SealDetector{
             
             print(detectionResult)
             
-            return detectionResult.detections
+            return detectionResult.detections.filter({ detection in
+                detection.boundingBox.width < mlImage.width / 2
+            }).sorted { d1, d2 in
+                // 左右位置が重なったら上下で比較
+                if ((d1.boundingBox.minX > d2.boundingBox.minX
+                     && d1.boundingBox.minX < d2.boundingBox.maxX)
+                    || (d1.boundingBox.minX < d2.boundingBox.maxX
+                        && d1.boundingBox.maxX > d2.boundingBox.minX)
+                ) {
+                    return (d2.boundingBox.minY - d1.boundingBox.minY)  < 0
+                }
+                
+                // 上記以外は左右位置で比較
+                return (d1.boundingBox.maxX - d2.boundingBox.maxX) < 0
+                
+            }
         }catch{
             return nil
         }

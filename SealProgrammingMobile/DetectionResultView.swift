@@ -11,7 +11,7 @@ struct DetectionResultView: View {
             let safeAreaWidth = size.width
             let safeAreaHeght = size.height
             
-            for detection in detections {
+            for (index, detection) in detections.enumerated() {
                 let scale = safeAreaWidth / imageSize.width // 縦長前提で横幅のスケールに合わせる
                 let convertedRect = detection.boundingBox.applying(
                     CGAffineTransform(
@@ -34,7 +34,7 @@ struct DetectionResultView: View {
                 guard let category = detection.categories.first  else {continue}
                 let seal = SealConverter.LabelToSeal(label: category.label ?? "")
                 let score = String(format: "%.2f", category.score)
-                var text: String  = seal.text
+                var text: String  = String(index + 1) + "." + seal.text
                 if showScore {
                     text += "(" + score + ")"
                 }
