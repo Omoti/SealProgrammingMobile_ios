@@ -80,7 +80,6 @@ class DeviceManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
                 foundPeripherals[index].discoverCount += 1
             }
         } else {
-            print(peripheral)
             foundPeripherals.append(foundPeripheral)
         }
     }

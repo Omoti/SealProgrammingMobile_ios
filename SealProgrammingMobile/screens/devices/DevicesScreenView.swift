@@ -5,21 +5,6 @@ struct DeviceScanView: View {
     
     var body: some View {
         List(){
-            if(!deviceManger.isSearching){
-                Button(action: {
-                    deviceManger.startScan()
-                }){
-                    Text("Scan")
-                        .font(.largeTitle)
-                }
-            }else{
-                Button(action: {
-                    deviceManger.stopScan()
-                }){
-                    Text("Stop")
-                        .font(.largeTitle)
-                }
-            }
             ForEach(deviceManger.foundPeripherals, id: \.self) { peripheral in
                 FoundDeviceItem(
                     name:peripheral.name,
@@ -28,11 +13,10 @@ struct DeviceScanView: View {
                     }
                 )
             }
-            Button(action: {
-                deviceManger.write(data: "hoge")
-            }) {
-                Text("Write")
-            }
+        }.onAppear(){
+            deviceManger.startScan()
+        }.onDisappear(){
+            deviceManger.stopScan()
         }
     }
 }
