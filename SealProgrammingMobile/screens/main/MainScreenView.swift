@@ -10,7 +10,7 @@ struct MainScreenView: View{
     @State var showingDeviceScreenView = false
     
     @State var pickedImage: UIImage?
-    @State var detectionResult: DetectionResult?
+    @State var detections: [Detection]?
     
     var body:some View{
         NavigationView{
@@ -30,8 +30,8 @@ struct MainScreenView: View{
                         }.background(Color.white)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                     }
-                    if let detectionResult = detectionResult {
-                        DetectionResultView(detections: detectionResult.detections, imageSize: pickedImage!.size)
+                    if detections != nil {
+                        DetectionResultView(detections: detections!, imageSize: pickedImage!.size)
                     }
                 }.aspectRatio(3/4, contentMode: ContentMode.fit)
                     .background(Color.white)

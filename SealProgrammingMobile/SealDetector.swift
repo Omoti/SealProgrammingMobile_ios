@@ -4,7 +4,7 @@
 import TensorFlowLiteTaskVision
 
 struct SealDetector{
-    static func detect(image: UIImage) -> DetectionResult? {
+    static func detect(image: UIImage) -> [Detection]? {
         // Initialization
         guard let modelPath = Bundle.main.path(forResource: "seals_model",
                                                ofType: "tflite")
@@ -33,7 +33,7 @@ struct SealDetector{
             
             print(detectionResult)
             
-            return detectionResult
+            return detectionResult.detections
         }catch{
             return nil
         }
