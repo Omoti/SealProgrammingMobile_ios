@@ -7,7 +7,7 @@ struct MainScreenView: View{
     
     @State var showingImagePicker = false
     @State var showingCameraPicker = false
-    @State var showingDeviceScanView = false
+    @State var showingDeviceScreenView = false
     
     @State var pickedImage: UIImage?
     @State var detectionResult: DetectionResult?
@@ -53,7 +53,7 @@ struct MainScreenView: View{
                         label: "つなぐ",
                         color: Color("PrimaryColor"),
                         action: {
-                            showingDeviceScanView = true
+                            showingDeviceScreenView = true
                         }
                     )
                     Spacer()
@@ -71,8 +71,10 @@ struct MainScreenView: View{
                 ImagePickerView(image: $pickedImage, sourceType: .library)
             }.sheet(isPresented:$showingCameraPicker) {
                 ImagePickerView(image: $pickedImage, sourceType: .camera)
-            }.sheet(isPresented: $showingDeviceScanView) {
-                DeviceScanView().environmentObject(deviceManager)
+            }.sheet(isPresented: $showingDeviceScreenView) {
+                DeviceScanView(onConnect: {
+                    showingDeviceScreenView = false
+                }).environmentObject(deviceManager)
             }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 .background(Color("ControlBackgroundColor"))
                 .navigationBarTitle("シールプログラミング")

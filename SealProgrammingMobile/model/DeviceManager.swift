@@ -4,6 +4,7 @@ import CoreVideo
 class DeviceManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     @Published var isSearching: Bool = false
     @Published var foundPeripherals: [Peripheral] = []
+    @Published var connectedPeripheral: Peripheral? = nil
     
     private var centralManager: CBCentralManager!
     private var currentPeripheral: CBPeripheral? = nil
@@ -11,9 +12,13 @@ class DeviceManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
     private let characteristicUUID: [CBUUID] = [CBUUID(string: "6E400002-B5A3-F393-E0A9-E50E24DCCA9E")] //RX
     private var writeData: String = ""
     
+    override init() {
+        super.init()
+        centralManager = CBCentralManager(delegate: self, queue: nil)
+    }
+
     func startScan() {
         foundPeripherals.removeAll()
-        centralManager = CBCentralManager(delegate: self, queue: nil)
         isSearching = true
     }
     
@@ -26,6 +31,7 @@ class DeviceManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
     
     func connect(peripheral: Peripheral){
         currentPeripheral = peripheral.peripheral
+        connectedPeripheral = peripheral
         centralManager.connect(currentPeripheral!)
         stopScan()
     }
