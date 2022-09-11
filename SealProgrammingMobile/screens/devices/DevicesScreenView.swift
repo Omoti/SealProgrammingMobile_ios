@@ -21,14 +21,12 @@ struct DeviceScanView: View {
                 }
             }
             ForEach(deviceManger.foundPeripherals, id: \.self) { peripheral in
-                HStack{
-                    Text(peripheral.name)
-                    Button(action: {
+                FoundDeviceItem(
+                    name:peripheral.name,
+                    action: {
                         deviceManger.connect(peripheral: peripheral)
-                    }) {
-                        Text("Connect")
                     }
-                }
+                )
             }
             Button(action: {
                 deviceManger.write(data: "hoge")
