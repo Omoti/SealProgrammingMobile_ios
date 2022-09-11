@@ -68,7 +68,11 @@ struct MainScreenView: View{
                     Spacer()
                 }
             }.sheet(isPresented:$showingImagePicker) {
-                ImagePickerView(image: $pickedImage, sourceType: .library)
+                ImagePickerView(image: $pickedImage, sourceType: .library).onDisappear(){
+                    if pickedImage != nil {
+                        detections = SealDetector.detect(image: pickedImage!)
+                    }
+                }
             }.sheet(isPresented:$showingCameraPicker) {
                 ImagePickerView(image: $pickedImage, sourceType: .camera)
             }.sheet(isPresented: $showingDeviceScreenView) {
