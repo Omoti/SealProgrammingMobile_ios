@@ -41,9 +41,7 @@ struct DetectionResultView: View {
                 context.draw(Text(text)
                     .font(.footnote)
                     .foregroundColor(.yellow)
-                , at: CGPoint(x: x, y: y)
-                
-                )
+                , at: CGPoint(x: x  + convertedRect.width / 2, y: y + convertedRect.height /  3))
             }
         }
     }
