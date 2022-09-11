@@ -62,7 +62,7 @@ struct MainScreenView: View{
                         label: "おくる",
                         color: Color("SecondaryColor"),
                         action: {
-                            // TODO : プログラムをおくる
+                            deviceManager.write(data: "hoge")
                         }
                     )
                     Spacer()

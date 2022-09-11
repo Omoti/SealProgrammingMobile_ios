@@ -1,5 +1,4 @@
 import CoreBluetooth
-import CoreVideo
 
 class DeviceManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     @Published var isSearching: Bool = false
@@ -114,7 +113,8 @@ class DeviceManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPer
         for i in service.characteristics!{
             switch(i.uuid.uuidString){
             case characteristicUUID.first?.uuidString:
-                peripheral.writeValue(writeData.data(using: .utf8)! , for: i, type: .withResponse)
+                print("write:" + writeData)
+                CommandWriter.write(peripheral: peripheral, characteristic: i, commands: writeData)
                 break
             default:
                 break
