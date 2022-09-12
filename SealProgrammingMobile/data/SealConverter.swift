@@ -1,5 +1,5 @@
 struct SealConverter{
-    static func SealToCommand(seal: Seal) -> String{
+    static func sealToCommand(seal: Seal) -> String{
         switch(seal){
         case .forward:
             return SerialCommand.forward
@@ -18,7 +18,7 @@ struct SealConverter{
         }
     }
     
-    static func LabelToSeal(label: String) -> Seal{
+    static func labelToSeal(label: String) -> Seal{
         switch(label){
         case "forward":
             return Seal.forward

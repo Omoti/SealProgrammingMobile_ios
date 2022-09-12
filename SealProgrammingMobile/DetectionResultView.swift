@@ -32,7 +32,7 @@ struct DetectionResultView: View {
                                with: .color(.yellow))
                 
                 guard let category = detection.categories.first  else {continue}
-                let seal = SealConverter.LabelToSeal(label: category.label ?? "")
+                let seal = SealConverter.labelToSeal(label: category.label ?? "")
                 let score = String(format: "%.2f", category.score)
                 var text: String  = String(index + 1) + "." + seal.text
                 if showScore {
