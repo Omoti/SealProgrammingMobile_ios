@@ -62,7 +62,9 @@ struct MainScreenView: View{
                         label: "おくる",
                         color: Color("SecondaryColor"),
                         action: {
-                            deviceManager.write(data: "hoge")
+                            if detections != nil {
+                                deviceManager.write(data: SealConverter.detectionsToCommands(detactions: detections!))
+                            }
                         }
                     )
                     Spacer()

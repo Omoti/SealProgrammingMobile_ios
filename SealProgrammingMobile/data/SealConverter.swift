@@ -1,3 +1,5 @@
+import TensorFlowLiteTaskVision
+
 struct SealConverter{
     static func sealToCommand(seal: Seal) -> String{
         switch(seal){
@@ -37,5 +39,17 @@ struct SealConverter{
         default:
             return Seal.stop
         }
+    }
+    
+    static func detectionsToCommands(detactions: [Detection]) -> String{
+        var commands = ""
+        
+        for detection in detactions {
+            let label = detection.categories.first?.label ?? ""
+            let seal = labelToSeal(label: label)
+            commands.append(sealToCommand(seal: seal))
+        }
+        
+        return commands
     }
 }
