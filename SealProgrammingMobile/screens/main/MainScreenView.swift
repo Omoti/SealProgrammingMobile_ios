@@ -7,6 +7,7 @@ struct MainScreenView: View{
     
     @State var showingImagePicker = false
     @State var showingCameraPicker = false
+    @State var showingCaptureScreenView = false
     @State var showingDeviceScreenView = false
     
     @State var pickedImage: UIImage?
@@ -44,7 +45,7 @@ struct MainScreenView: View{
                         color: Color("PrimaryColor"),
                         action: {
                             // showingCameraPicker.toggle()
-                            showingImagePicker.toggle()
+                            showingCaptureScreenView = true
                         }
                     )
                     Spacer()
@@ -77,6 +78,8 @@ struct MainScreenView: View{
                 }
             }.sheet(isPresented:$showingCameraPicker) {
                 ImagePickerView(image: $pickedImage, sourceType: .camera)
+            }.sheet(isPresented:$showingCaptureScreenView) {
+                CaptureScreenView()
             }.sheet(isPresented: $showingDeviceScreenView) {
                 DeviceScanView(onConnect: {
                     showingDeviceScreenView = false
