@@ -102,8 +102,6 @@
 				6762E31E28CCBEED00A2990E /* components */,
 				6762E31A28CC917100A2990E /* screens */,
 				67036D8528A5F4C1009E5480 /* Info.plist */,
-				67036D9428A717ED009E5480 /* DetectionResultView.swift */,
-				67036D8A28A629D5009E5480 /* SealDetector.swift */,
 				67036D7728A4D95D009E5480 /* SealProgrammingMobileApp.swift */,
 				67036D8628A61345009E5480 /* ImagePickerView.swift */,
 				67036D7B28A4D965009E5480 /* Assets.xcassets */,
@@ -133,6 +131,7 @@
 		6762E31D28CC9B3A00A2990E /* main */ = {
 			isa = PBXGroup;
 			children = (
+				67036D9428A717ED009E5480 /* DetectionResultView.swift */,
 				6762E31B28CC91A700A2990E /* MainScreenView.swift */,
 			);
 			path = main;
@@ -160,6 +159,7 @@
 			children = (
 				67036DA028A89925009E5480 /* DeviceManager.swift */,
 				6762E32E28CE9F4E00A2990E /* CommandWriter.swift */,
+				67036D8A28A629D5009E5480 /* SealDetector.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
