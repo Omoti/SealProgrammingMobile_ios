@@ -8,7 +8,7 @@ struct SwitchCameraButton: View{
             action: action
         ){
             ZStack{
-                Image(systemName: "arrow.triangle.2.circlepath.camera")
+                Image(systemName: "arrow.triangle.2.circlepath")
                     .foregroundColor(.white)
                     .font(.system(size: 25))
                     .frame(width: 50, height: 50, alignment: .center)

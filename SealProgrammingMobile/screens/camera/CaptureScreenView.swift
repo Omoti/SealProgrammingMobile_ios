@@ -22,7 +22,7 @@ struct CaptureScreenView: View {
                     })
                     Spacer().overlay(
                         SwitchCameraButton(action: {
-                            // Switch camera
+                            camera.switchPosition()
                         })
                     )
                 }.padding(20)
