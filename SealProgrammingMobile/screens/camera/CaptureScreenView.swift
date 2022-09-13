@@ -20,7 +20,11 @@ struct CaptureScreenView: View {
                     ShutterButton(action: {
                         // Take a picture
                     })
-                    Spacer()　// TODO: カメラ切り替え
+                    Spacer().overlay(
+                        SwitchCameraButton(action: {
+                            // Switch camera
+                        })
+                    )
                 }.padding(20)
             }
         }.background(.black)
