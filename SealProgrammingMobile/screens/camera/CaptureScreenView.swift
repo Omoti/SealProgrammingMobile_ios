@@ -12,6 +12,17 @@ struct CaptureScreenView: View {
                 camera.setupCaptureSession()
             }.aspectRatio(3/4, contentMode: ContentMode.fit)
             Spacer()
-        }
+            if(camera.captured){
+                Spacer()
+            }else{
+                HStack{
+                    Spacer()
+                    ShutterButton(action: {
+                        // Take a picture
+                    })
+                    Spacer()　// TODO: カメラ切り替え
+                }.padding(20)
+            }
+        }.background(.black)
     }
 }

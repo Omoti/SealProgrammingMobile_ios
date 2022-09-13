@@ -4,6 +4,7 @@ class CamearaManager : ObservableObject{
     @Published var captureSession: AVCaptureSession = AVCaptureSession()
     @Published var output: AVCaptureOutput = AVCapturePhotoOutput()
     @Published var preview: AVCaptureVideoPreviewLayer!
+    @Published var captured = false
     
     func setupCaptureSession(){
         captureSession.beginConfiguration() // 設定開始
