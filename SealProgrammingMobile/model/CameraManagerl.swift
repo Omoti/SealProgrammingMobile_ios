@@ -63,7 +63,6 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
     func capture(){
         DispatchQueue.global(qos: .background).async {
             self.output.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
-            self.captureSession.stopRunning()
             
             DispatchQueue.main.async {
                 withAnimation{self.captured.toggle()}
@@ -87,6 +86,8 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
             print("photo outut error")
             return
         }
+        
+        captureSession.stopRunning()
         
         guard let imageData = photo.fileDataRepresentation() else {return}
             
