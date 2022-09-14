@@ -1,8 +1,10 @@
 import AVFoundation
+import Foundation
+import SwiftUI
 
-class CamearaManager : ObservableObject{
+class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
     @Published var captureSession: AVCaptureSession = AVCaptureSession()
-    @Published var output: AVCaptureOutput = AVCapturePhotoOutput()
+    @Published var output: AVCapturePhotoOutput = AVCapturePhotoOutput()
     @Published var preview: AVCaptureVideoPreviewLayer!
     @Published var captured = false
     
@@ -49,5 +51,27 @@ class CamearaManager : ObservableObject{
         
         reset()
         setupCaptureSession()
+    }
+    
+    func stop(){
+        self.captureSession.stopRunning()
+    }
+    
+    func capture(){
+        DispatchQueue.global(qos: .background).async {
+            self.output.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
+            self.captureSession.stopRunning()
+            
+            DispatchQueue.main.async {
+                withAnimation{self.captured.toggle()}
+            }
+        }
+    }
+    
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        if error != nil {
+            print("photo outut error")
+            return
+        }
     }
 }

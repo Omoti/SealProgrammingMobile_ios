@@ -27,7 +27,7 @@ struct CaptureScreenView: View {
                 HStack{
                     Spacer()
                     ShutterButton(action: {
-                        // Take a picture
+                        camera.capture()
                     })
                     Spacer().overlay(
                         SwitchCameraButton(action: {
