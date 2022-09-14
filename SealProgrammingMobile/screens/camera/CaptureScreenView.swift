@@ -12,6 +12,7 @@ struct CaptureScreenView: View {
             HStack{
                 Spacer()
                 CloseButton(action: {
+                    camera.stop()
                     dismiss()
                 })
             }.padding(10)
