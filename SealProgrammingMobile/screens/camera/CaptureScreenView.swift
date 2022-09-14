@@ -22,7 +22,13 @@ struct CaptureScreenView: View {
             }.aspectRatio(3/4, contentMode: ContentMode.fit)
             Spacer()
             if(camera.captured){
-                Spacer()
+                HStack{
+                    Spacer()
+                    SwitchCameraButton(action: {
+                        camera.restart()
+                    })
+                    Spacer()
+                }.padding(20)
             }else{
                 HStack{
                     Spacer()

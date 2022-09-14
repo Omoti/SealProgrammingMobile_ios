@@ -68,6 +68,16 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
         }
     }
     
+    func restart(){
+        DispatchQueue.global(qos: .background).async {
+            self.captureSession.startRunning()
+            
+            DispatchQueue.main.async {
+                withAnimation{self.captured.toggle()}
+            }
+        }
+    }
+    
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         if error != nil {
             print("photo outut error")
