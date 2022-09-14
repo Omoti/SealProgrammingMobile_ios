@@ -25,11 +25,27 @@ struct CaptureScreenView: View {
             if(camera.captured){
                 HStack{
                     Spacer()
-                    SwitchCameraButton(action: {
-                        camera.restart()
-                    })
+                    IconButton(
+                        image: Image(systemName: "list.bullet"),
+                        label: "リスト",
+                        action: {
+                            // 一覧表示
+                        }
+                    )
                     Spacer()
-                }.padding(20)
+                    CircleButton(image: Image(systemName: "checkmark"), label: "OK", color: Color("PrimaryColor")) {
+                        // 保存
+                    }
+                    Spacer()
+                    IconButton(
+                        image: Image(systemName: "camera"),
+                        label: "とりなおす",
+                        action: {
+                            camera.restart()
+                        }
+                    )
+                    Spacer()
+                }.padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
             }else{
                 HStack{
                     Spacer()
