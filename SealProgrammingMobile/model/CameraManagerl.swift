@@ -7,11 +7,14 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
     @Published var output: AVCapturePhotoOutput = AVCapturePhotoOutput()
     @Published var preview: AVCaptureVideoPreviewLayer!
     @Published var captured = false
-    
+    @Published var saved = false
+    @Published var capturedData = Data(count: 0)
+
     private var input: AVCaptureInput!
     private var position: AVCaptureDevice.Position = .back
     
     func setupCaptureSession(){
+        saved = false
         captureSession.beginConfiguration() // 設定開始
         
         // デバイス選択
@@ -69,6 +72,7 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
     }
     
     func restart(){
+        saved = false
         DispatchQueue.global(qos: .background).async {
             self.captureSession.startRunning()
             
@@ -78,10 +82,28 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
         }
     }
     
-    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+    func photoOutput(_ _output:AVCapturePhotoOutput,didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?){
         if error != nil {
             print("photo outut error")
             return
         }
+        
+        guard let imageData = photo.fileDataRepresentation() else {return}
+            
+        self.capturedData  = imageData
+    }
+    
+    func save(){
+        let image = UIImage(data: self.capturedData)
+        
+        if image == nil {
+            print("not captured")
+            return
+        }
+        
+        UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+        
+        saved = true
+        print("saved")
     }
 }

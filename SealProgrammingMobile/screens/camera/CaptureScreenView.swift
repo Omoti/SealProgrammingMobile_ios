@@ -33,9 +33,14 @@ struct CaptureScreenView: View {
                         }
                     )
                     Spacer()
-                    CircleButton(image: Image(systemName: "checkmark"), label: "OK", color: Color("PrimaryColor")) {
-                        // 保存
-                    }
+                    CircleButton(
+                        image: Image(systemName: "checkmark"),
+                        label: "OK",
+                        color: Color("PrimaryColor"),
+                        action: {
+                            camera.save()
+                        }
+                    )
                     Spacer()
                     IconButton(
                         image: Image(systemName: "camera"),
