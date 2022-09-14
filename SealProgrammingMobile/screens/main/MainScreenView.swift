@@ -78,7 +78,7 @@ struct MainScreenView: View{
                 }
             }.sheet(isPresented:$showingCameraPicker) {
                 ImagePickerView(image: $pickedImage, sourceType: .camera)
-            }.sheet(isPresented:$showingCaptureScreenView) {
+            }.fullScreenCover(isPresented:$showingCaptureScreenView) {
                 CaptureScreenView()
             }.sheet(isPresented: $showingDeviceScreenView) {
                 DeviceScanView(onConnect: {
