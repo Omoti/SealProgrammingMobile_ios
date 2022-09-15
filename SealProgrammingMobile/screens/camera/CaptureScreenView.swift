@@ -1,11 +1,12 @@
 import SwiftUI
 import Foundation
+import TensorFlowLiteTaskVision
 
 struct CaptureScreenView: View {
     @Environment(\.dismiss) private var dismiss
     
-    @EnvironmentObject private var deviceManager :DeviceManager
     @StateObject private var camera = CamearaManager() // 再描画しても状態を保持
+    @EnvironmentObject private var sealDetector :SealDetector
     
     var body: some View {
         VStack{
@@ -18,6 +19,9 @@ struct CaptureScreenView: View {
             }.padding(10)
             ZStack{
                 PreviewView(camera: camera, aspectRatio: 3/4)
+                if sealDetector.detections != nil {
+                    DetectionResultView(detections: sealDetector.detections!, imageSize: UIImage(data: camera.capturedData)!.size)
+                }
             }.onAppear(){
                 camera.setupCaptureSession()
             }.aspectRatio(3/4, contentMode: ContentMode.fit)
@@ -38,7 +42,7 @@ struct CaptureScreenView: View {
                         label: "OK",
                         color: Color("PrimaryColor"),
                         action: {
-                            camera.save()
+                            sealDetector.detect(image: UIImage(data: camera.capturedData)!)
                         }
                     )
                     Spacer()

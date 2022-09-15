@@ -4,6 +4,7 @@ import TensorFlowLiteTaskVision
 
 struct MainScreenView: View{
     @EnvironmentObject private var deviceManager :DeviceManager
+    @EnvironmentObject private var sealDetector :SealDetector
     
     @State var showingImagePicker = false
     @State var showingCameraPicker = false
@@ -70,16 +71,8 @@ struct MainScreenView: View{
                     )
                     Spacer()
                 }
-            }.sheet(isPresented:$showingImagePicker) {
-                ImagePickerView(image: $pickedImage, sourceType: .library).onDisappear(){
-                    if pickedImage != nil {
-                        detections = SealDetector.detect(image: pickedImage!)
-                    }
-                }
-            }.sheet(isPresented:$showingCameraPicker) {
-                ImagePickerView(image: $pickedImage, sourceType: .camera)
             }.fullScreenCover(isPresented:$showingCaptureScreenView) {
-                CaptureScreenView()
+                CaptureScreenView().environmentObject(sealDetector)
             }.sheet(isPresented: $showingDeviceScreenView) {
                 DeviceScanView(onConnect: {
                     showingDeviceScreenView = false

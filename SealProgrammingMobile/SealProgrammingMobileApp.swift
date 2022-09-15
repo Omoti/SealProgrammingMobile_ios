@@ -14,7 +14,9 @@ struct SealProgrammingMobileApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainScreenView().environmentObject(DeviceManager())
+            MainScreenView()
+                .environmentObject(DeviceManager())
+                .environmentObject(SealDetector())
         }
     }
 }

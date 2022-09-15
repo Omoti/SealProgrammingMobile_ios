@@ -3,15 +3,16 @@
 // Imports
 import TensorFlowLiteTaskVision
 
-struct SealDetector{
-    static func detect(image: UIImage) -> [Detection]? {
+class SealDetector: ObservableObject{
+    @Published var detections: [Detection]? = nil
+    
+    func detect(image: UIImage) {
         // Initialization
         guard let modelPath = Bundle.main.path(forResource: "seals_model",
                                                ofType: "tflite")
         else {
             print("Failed to load the model file with name: seals_model.")
-            return nil
-            
+            return
         }
         
         let options = ObjectDetectorOptions(modelPath: modelPath)
@@ -26,14 +27,14 @@ struct SealDetector{
             // Convert the input image to MLImage.
             // There are other sources for MLImage. For more details, please see:
             // https://developers.google.com/ml-kit/reference/ios/mlimage/api/reference/Classes/GMLImage
-            guard let mlImage = MLImage(image: image) else { return nil }
+            guard let mlImage = MLImage(image: image) else { return }
             
             // Run inference
             let detectionResult = try detector.detect(mlImage: mlImage)
             
             print(detectionResult)
             
-            return detectionResult.detections.filter({ detection in
+            detections =  detectionResult.detections.filter({ detection in
                 detection.boundingBox.width < mlImage.width / 2
             }).sorted { d1, d2 in
                 // 左右位置が重なったら上下で比較
@@ -47,10 +48,9 @@ struct SealDetector{
                 
                 // 上記以外は左右位置で比較
                 return (d1.boundingBox.maxX - d2.boundingBox.maxX) < 0
-                
             }
         }catch{
-            return nil
+            return
         }
     }
 }

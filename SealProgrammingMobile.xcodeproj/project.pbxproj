@@ -146,7 +146,6 @@
 		6762E31D28CC9B3A00A2990E /* main */ = {
 			isa = PBXGroup;
 			children = (
-				67036D9428A717ED009E5480 /* DetectionResultView.swift */,
 				6762E31B28CC91A700A2990E /* MainScreenView.swift */,
 			);
 			path = main;
@@ -155,6 +154,7 @@
 		6762E31E28CCBEED00A2990E /* components */ = {
 			isa = PBXGroup;
 			children = (
+				67036D9428A717ED009E5480 /* DetectionResultView.swift */,
 				6762E31F28CCBF2100A2990E /* CircleButton.swift */,
 				6762E33728D1296100A2990E /* ShutterButton.swift */,
 				6762E33928D13C0300A2990E /* SwitchCameraButton.swift */,
