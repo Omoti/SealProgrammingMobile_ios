@@ -10,6 +10,8 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
     @Published var saved = false
     @Published var capturedUiImage: UIImage? = nil
 
+    var onCaptured: ((UIImage) -> Void)? = nil
+    
     private var input: AVCaptureInput!
     private var position: AVCaptureDevice.Position = .back
     
@@ -96,6 +98,10 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
         guard let cgImage = photo.cgImageRepresentation() else {return}
             
         self.capturedUiImage = UIImage(cgImage: cgImage, scale: 1, orientation: .right).fixedOrientation()
+        
+        if let uiImage = self.capturedUiImage{
+            onCaptured?(uiImage)
+        }
     }
     
     func save(){

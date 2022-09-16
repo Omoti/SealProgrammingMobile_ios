@@ -6,15 +6,14 @@ struct CaptureScreenView: View {
     @Environment(\.dismiss) private var dismiss
     
     @StateObject private var camera = CamearaManager() // 再描画しても状態を保持
-    @EnvironmentObject private var sealDetector :SealDetector
+    @StateObject private var sealDetector = SealDetector()
     
     var body: some View {
         VStack{
             HStack{
                 Spacer()
                 CloseButton(action: {
-                    camera.stop()
-                    dismiss()
+                    close()
                 })
             }.padding(10)
             ZStack{
@@ -52,7 +51,7 @@ struct CaptureScreenView: View {
                         label: "OK",
                         color: Color("PrimaryColor"),
                         action: {
-                            sealDetector.detect(image: camera.capturedUiImage!)
+                            close()
                         }
                     )
                     Spacer()
@@ -69,6 +68,7 @@ struct CaptureScreenView: View {
                 HStack{
                     Spacer()
                     ShutterButton(action: {
+                        camera.onCaptured = onCaptured
                         camera.capture()
                     })
                     Spacer().overlay(
@@ -79,5 +79,15 @@ struct CaptureScreenView: View {
                 }.padding(20)
             }
         }.background(.black)
+    }
+    
+    func onCaptured(uiImage: UIImage) {
+        sealDetector.detect(image: uiImage)
+    }
+    
+    func close(){
+        camera.onCaptured = nil
+        camera.stop()
+        dismiss()
     }
 }

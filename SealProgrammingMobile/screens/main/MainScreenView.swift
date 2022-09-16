@@ -72,7 +72,7 @@ struct MainScreenView: View{
                     Spacer()
                 }
             }.fullScreenCover(isPresented:$showingCaptureScreenView) {
-                CaptureScreenView().environmentObject(sealDetector)
+                CaptureScreenView()
             }.sheet(isPresented: $showingDeviceScreenView) {
                 DeviceScanView(onConnect: {
                     showingDeviceScreenView = false
