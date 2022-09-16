@@ -3,7 +3,7 @@ import AVFoundation
 import SwiftUI
 
 struct PreviewView: UIViewRepresentable {
-    @ObservedObject var camera: CamearaManager
+    @ObservedObject var camera: CameraModel
     var aspectRatio: Double
     
     func makeUIView(context: Context) -> UIView {

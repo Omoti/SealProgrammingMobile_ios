@@ -2,7 +2,7 @@ import AVFoundation
 import Foundation
 import SwiftUI
 
-class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
+class CameraModel : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
     @Published var captureSession: AVCaptureSession = AVCaptureSession()
     @Published var output: AVCapturePhotoOutput = AVCapturePhotoOutput()
     @Published var preview: AVCaptureVideoPreviewLayer!

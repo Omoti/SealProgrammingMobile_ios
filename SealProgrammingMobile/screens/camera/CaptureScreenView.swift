@@ -5,7 +5,7 @@ import TensorFlowLiteTaskVision
 struct CaptureScreenView: View {
     @Environment(\.dismiss) private var dismiss
     
-    @StateObject private var camera = CamearaManager() // 再描画しても状態を保持
+    @StateObject private var camera = CameraModel() // 再描画しても状態を保持
     @StateObject private var sealDetector = SealDetector()
     
     var body: some View {
