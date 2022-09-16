@@ -4,26 +4,30 @@ import TensorFlowLiteTaskVision
 
 struct MainScreenView: View{
     @EnvironmentObject private var deviceModel :DeviceModel
-    @EnvironmentObject private var sealDetector :SealDetector
+    @EnvironmentObject private var detectionResultModel :DetectionResultModel
     
     @State var showingImagePicker = false
     @State var showingCameraPicker = false
     @State var showingCaptureScreenView = false
     @State var showingDeviceScreenView = false
     
-    @State var pickedImage: UIImage?
-    @State var detections: [Detection]?
+    //@State var pickedImage: UIImage?
+    
     
     var body:some View{
         NavigationView{
             VStack(alignment: .center) {
                 ZStack{
-                    if let image = pickedImage {
+                    if let image = detectionResultModel.image {
                         Image(uiImage: image)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .background(Color.white)
                             .frame(maxHeight: .infinity)
+                        
+                        if let detections = detectionResultModel.detections {
+                            DetectionResultView(detections: detections, imageSize: image.size)
+                        }
                     }else{
                         VStack{
                             Spacer()
@@ -31,9 +35,6 @@ struct MainScreenView: View{
                             Spacer()
                         }.background(Color.white)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-                    }
-                    if detections != nil {
-                        DetectionResultView(detections: detections!, imageSize: pickedImage!.size)
                     }
                 }.aspectRatio(3/4, contentMode: ContentMode.fit)
                     .background(Color.white)
@@ -64,8 +65,8 @@ struct MainScreenView: View{
                         label: "おくる",
                         color: Color("SecondaryColor"),
                         action: {
-                            if detections != nil {
-                                deviceModel.write(data: SealConverter.detectionsToCommands(detactions: detections!))
+                            if let detections = detectionResultModel.detections {
+                                deviceModel.write(data: SealConverter.detectionsToCommands(detactions: detections))
                             }
                         }
                     )
@@ -73,6 +74,7 @@ struct MainScreenView: View{
                 }
             }.fullScreenCover(isPresented:$showingCaptureScreenView) {
                 CaptureScreenView()
+                    .environmentObject(detectionResultModel)
             }.sheet(isPresented: $showingDeviceScreenView) {
                 DeviceScanView(onConnect: {
                     showingDeviceScreenView = false

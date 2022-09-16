@@ -5,6 +5,8 @@ import TensorFlowLiteTaskVision
 struct CaptureScreenView: View {
     @Environment(\.dismiss) private var dismiss
     
+    @EnvironmentObject private var detectionResultModel :DetectionResultModel
+    
     @StateObject private var camera = CameraModel() // 再描画しても状態を保持
     @StateObject private var sealDetector = SealDetector()
     
@@ -51,6 +53,8 @@ struct CaptureScreenView: View {
                         label: "OK",
                         color: Color("PrimaryColor"),
                         action: {
+                            detectionResultModel.image = camera.capturedUiImage
+                            detectionResultModel.detections = sealDetector.detections
                             close()
                         }
                     )

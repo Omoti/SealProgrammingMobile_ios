@@ -16,7 +16,7 @@ struct SealProgrammingMobileApp: App {
         WindowGroup {
             MainScreenView()
                 .environmentObject(DeviceModel())
-                .environmentObject(SealDetector())
+                .environmentObject(DetectionResultModel())
         }
     }
 }
