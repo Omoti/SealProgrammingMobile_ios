@@ -17,6 +17,9 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
         saved = false
         captureSession.beginConfiguration() // 設定開始
         
+        // 4:3
+        captureSession.sessionPreset = AVCaptureSession.Preset.photo
+        
         // デバイス選択
         guard let device = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera],
                                                             mediaType: AVMediaType.video,
