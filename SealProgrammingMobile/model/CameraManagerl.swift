@@ -93,9 +93,9 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
         
         captureSession.stopRunning()
         
-        guard let imageData = photo.fileDataRepresentation() else {return}
+        guard let cgImage = photo.cgImageRepresentation() else {return}
             
-        self.capturedUiImage = UIImage(data: imageData)
+        self.capturedUiImage = UIImage(cgImage: cgImage, scale: 1, orientation: .right).fixedOrientation()
     }
     
     func save(){
