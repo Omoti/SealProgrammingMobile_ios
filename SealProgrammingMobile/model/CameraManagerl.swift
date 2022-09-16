@@ -8,7 +8,7 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
     @Published var preview: AVCaptureVideoPreviewLayer!
     @Published var captured = false
     @Published var saved = false
-    @Published var capturedData = Data(count: 0)
+    @Published var capturedUiImage: UIImage? = nil
 
     private var input: AVCaptureInput!
     private var position: AVCaptureDevice.Position = .back
@@ -75,6 +75,7 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
     
     func restart(){
         saved = false
+        capturedUiImage = nil
         DispatchQueue.global(qos: .background).async {
             self.captureSession.startRunning()
             
@@ -94,11 +95,11 @@ class CamearaManager : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate
         
         guard let imageData = photo.fileDataRepresentation() else {return}
             
-        self.capturedData  = imageData
+        self.capturedUiImage = UIImage(data: imageData)
     }
     
     func save(){
-        let image = UIImage(data: self.capturedData)
+        let image = capturedUiImage
         
         if image == nil {
             print("not captured")

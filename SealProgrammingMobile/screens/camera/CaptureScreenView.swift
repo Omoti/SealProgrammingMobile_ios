@@ -19,8 +19,18 @@ struct CaptureScreenView: View {
             }.padding(10)
             ZStack{
                 PreviewView(camera: camera, aspectRatio: 3/4)
-                if sealDetector.detections != nil {
-                    DetectionResultView(detections: sealDetector.detections!, imageSize: UIImage(data: camera.capturedData)!.size)
+                
+                // 撮影画像
+                if let image = camera.capturedUiImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(maxHeight: .infinity)
+                    
+                    // 検出結果を重ねる
+                    if sealDetector.detections != nil {
+                        DetectionResultView(detections: sealDetector.detections!, imageSize: camera.capturedUiImage!.size)
+                    }
                 }
             }.onAppear(){
                 camera.setupCaptureSession()
@@ -42,7 +52,7 @@ struct CaptureScreenView: View {
                         label: "OK",
                         color: Color("PrimaryColor"),
                         action: {
-                            sealDetector.detect(image: UIImage(data: camera.capturedData)!)
+                            sealDetector.detect(image: camera.capturedUiImage!)
                         }
                     )
                     Spacer()
