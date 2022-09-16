@@ -1,25 +1,25 @@
 import SwiftUI
 
 struct DeviceScanView: View {
-    @EnvironmentObject private var deviceManager :DeviceManager
+    @EnvironmentObject private var deviceModel :DeviceModel
     
     var onConnect: () -> Void
     
     var body: some View {
         List(){
-            ForEach(deviceManager.foundPeripherals, id: \.self) { peripheral in
+            ForEach(deviceModel.foundPeripherals, id: \.self) { peripheral in
                 FoundDeviceItem(
                     name:peripheral.name,
                     action: {
-                        deviceManager.connect(peripheral: peripheral)
+                        deviceModel.connect(peripheral: peripheral)
                         onConnect()
                     }
                 )
             }
         }.onAppear(){
-            deviceManager.startScan()
+            deviceModel.startScan()
         }.onDisappear(){
-            deviceManager.stopScan()
+            deviceModel.stopScan()
         }
     }
 }

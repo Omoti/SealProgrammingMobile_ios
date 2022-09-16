@@ -1,6 +1,6 @@
 import CoreBluetooth
 
-class DeviceManager: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     @Published var isSearching: Bool = false
     @Published var foundPeripherals: [Peripheral] = []
     @Published var connectedPeripheral: Peripheral? = nil

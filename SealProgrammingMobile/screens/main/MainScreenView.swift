@@ -3,7 +3,7 @@ import SwiftUI
 import TensorFlowLiteTaskVision
 
 struct MainScreenView: View{
-    @EnvironmentObject private var deviceManager :DeviceManager
+    @EnvironmentObject private var deviceModel :DeviceModel
     @EnvironmentObject private var sealDetector :SealDetector
     
     @State var showingImagePicker = false
@@ -65,7 +65,7 @@ struct MainScreenView: View{
                         color: Color("SecondaryColor"),
                         action: {
                             if detections != nil {
-                                deviceManager.write(data: SealConverter.detectionsToCommands(detactions: detections!))
+                                deviceModel.write(data: SealConverter.detectionsToCommands(detactions: detections!))
                             }
                         }
                     )
@@ -76,7 +76,7 @@ struct MainScreenView: View{
             }.sheet(isPresented: $showingDeviceScreenView) {
                 DeviceScanView(onConnect: {
                     showingDeviceScreenView = false
-                }).environmentObject(deviceManager)
+                }).environmentObject(deviceModel)
             }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 .background(Color("ControlBackgroundColor"))
                 .navigationBarTitle("シールプログラミング")

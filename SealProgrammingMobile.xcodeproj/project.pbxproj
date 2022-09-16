@@ -17,7 +17,7 @@
 		67036D9528A717ED009E5480 /* DetectionResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67036D9428A717ED009E5480 /* DetectionResultView.swift */; };
 		67036D9728A7AF8A009E5480 /* efficientdet_lite0.tflite in Resources */ = {isa = PBXBuildFile; fileRef = 67036D9628A7AF8A009E5480 /* efficientdet_lite0.tflite */; };
 		67036D9B28A8558D009E5480 /* DevicesScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67036D9A28A8558D009E5480 /* DevicesScreenView.swift */; };
-		67036DA128A89925009E5480 /* DeviceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67036DA028A89925009E5480 /* DeviceManager.swift */; };
+		67036DA128A89925009E5480 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67036DA028A89925009E5480 /* DeviceModel.swift */; };
 		671287C528D1E12500643641 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671287C428D1E12500643641 /* CloseButton.swift */; };
 		671287C728D2788400643641 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671287C628D2788400643641 /* IconButton.swift */; };
 		671287CB28D49A4C00643641 /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671287CA28D49A4C00643641 /* UIImageExt.swift */; };
@@ -48,7 +48,7 @@
 		67036D9428A717ED009E5480 /* DetectionResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionResultView.swift; sourceTree = "<group>"; };
 		67036D9628A7AF8A009E5480 /* efficientdet_lite0.tflite */ = {isa = PBXFileReference; lastKnownFileType = file; name = efficientdet_lite0.tflite; path = assetes/efficientdet_lite0.tflite; sourceTree = "<group>"; };
 		67036D9A28A8558D009E5480 /* DevicesScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesScreenView.swift; sourceTree = "<group>"; };
-		67036DA028A89925009E5480 /* DeviceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceManager.swift; sourceTree = "<group>"; };
+		67036DA028A89925009E5480 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		671287C428D1E12500643641 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		671287C628D2788400643641 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		671287CA28D49A4C00643641 /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 		6762E32228CD5BA100A2990E /* model */ = {
 			isa = PBXGroup;
 			children = (
-				67036DA028A89925009E5480 /* DeviceManager.swift */,
+				67036DA028A89925009E5480 /* DeviceModel.swift */,
 				6762E32E28CE9F4E00A2990E /* CommandWriter.swift */,
 				67036D8A28A629D5009E5480 /* SealDetector.swift */,
 				6762E33528CFED4300A2990E /* CameraManagerl.swift */,
@@ -313,7 +313,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				67036DA128A89925009E5480 /* DeviceManager.swift in Sources */,
+				67036DA128A89925009E5480 /* DeviceModel.swift in Sources */,
 				67036D8B28A629D5009E5480 /* SealDetector.swift in Sources */,
 				6762E32928CDF2C800A2990E /* Seal.swift in Sources */,
 				6762E32628CDCFAD00A2990E /* SerialCommand.swift in Sources */,
