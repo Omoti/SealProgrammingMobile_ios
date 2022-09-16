@@ -83,7 +83,7 @@
 		13540155D31555E1B935AD9FD54D306C /* TFLCommonUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TFLCommonUtils.m; path = tensorflow_lite_support/ios/sources/TFLCommonUtils.m; sourceTree = "<group>"; };
 		175492DD1507E62723C248C9D3D3301E /* TensorFlowLiteTaskVision-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TensorFlowLiteTaskVision-prefix.pch"; sourceTree = "<group>"; };
 		1AE5D7180F448D4F9100BA76F9F7484C /* Pods-SealProgrammingMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SealProgrammingMobile.debug.xcconfig"; sourceTree = "<group>"; };
-		2B6893432A52132A742ED555BC0AC959 /* TensorFlowLiteTaskVision */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TensorFlowLiteTaskVision; path = TensorFlowLiteTaskVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B6893432A52132A742ED555BC0AC959 /* TensorFlowLiteTaskVision.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TensorFlowLiteTaskVision.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		302FDBC06D361B347A56115AE01A4C6D /* GMLImage+Utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "GMLImage+Utils.h"; path = "tensorflow_lite_support/ios/task/vision/utils/sources/GMLImage+Utils.h"; sourceTree = "<group>"; };
 		398C640C4EF7BC4306EDB4B1F6398D04 /* base_options.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = base_options.h; path = tensorflow_lite_support/c/task/core/base_options.h; sourceTree = "<group>"; };
 		40045BD8C033EBB6F55A8B29BEFFD9BB /* TFLImageSegmenter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TFLImageSegmenter.m; path = tensorflow_lite_support/ios/task/vision/sources/TFLImageSegmenter.m; sourceTree = "<group>"; };
@@ -121,7 +121,7 @@
 		8E208B005A25C730048DD09F540A1CD0 /* image_segmenter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = image_segmenter.h; path = tensorflow_lite_support/c/task/vision/image_segmenter.h; sourceTree = "<group>"; };
 		931FD1B922C9DFF2EC5EF0218D4EF5B7 /* Pods-SealProgrammingMobile-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SealProgrammingMobile-acknowledgements.markdown"; sourceTree = "<group>"; };
 		963E92FFF03E7824EF67C1F0B74FE29A /* Pods-SealProgrammingMobile */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-SealProgrammingMobile"; path = Pods_SealProgrammingMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A12246B48920B0F5B620CC2958057E2D /* TFLSegmentationResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TFLSegmentationResult.h; path = tensorflow_lite_support/ios/task/processor/sources/TFLSegmentationResult.h; sourceTree = "<group>"; };
 		A33069303490930782C34407F5795FAF /* segmentation_result.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = segmentation_result.h; path = tensorflow_lite_support/c/task/processor/segmentation_result.h; sourceTree = "<group>"; };
 		A4D5E2BE0AF69D28C35968566C968F11 /* TensorFlowLiteTaskVisionC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TensorFlowLiteTaskVisionC.framework; path = Frameworks/TensorFlowLiteTaskVisionC.framework; sourceTree = "<group>"; };
@@ -170,7 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				963E92FFF03E7824EF67C1F0B74FE29A /* Pods-SealProgrammingMobile */,
-				2B6893432A52132A742ED555BC0AC959 /* TensorFlowLiteTaskVision */,
+				2B6893432A52132A742ED555BC0AC959 /* TensorFlowLiteTaskVision.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -245,7 +245,6 @@
 				E1B526830E989A997CA40C883CC62821 /* Frameworks */,
 				4174979536552F73CE2454DD146EBC21 /* Support Files */,
 			);
-			name = TensorFlowLiteTaskVision;
 			path = TensorFlowLiteTaskVision;
 			sourceTree = "<group>";
 		};
@@ -403,7 +402,7 @@
 			);
 			name = TensorFlowLiteTaskVision;
 			productName = TensorFlowLiteTaskVision;
-			productReference = 2B6893432A52132A742ED555BC0AC959 /* TensorFlowLiteTaskVision */;
+			productReference = 2B6893432A52132A742ED555BC0AC959 /* TensorFlowLiteTaskVision.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -514,7 +513,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/TensorFlowLiteTaskVision/TensorFlowLiteTaskVision-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/TensorFlowLiteTaskVision/TensorFlowLiteTaskVision-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -588,7 +587,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/TensorFlowLiteTaskVision/TensorFlowLiteTaskVision-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/TensorFlowLiteTaskVision/TensorFlowLiteTaskVision-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
