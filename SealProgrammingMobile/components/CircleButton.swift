@@ -2,6 +2,8 @@ import SwiftUI
 import Foundation
 
 struct CircleButton: View{
+    @Environment(\.isEnabled) var isEnabled
+
     var image: Image
     var label: String
     var color: Color
@@ -24,6 +26,7 @@ struct CircleButton: View{
                 .background(color)
                 .foregroundColor(.white)
                 .clipShape(Circle())
+                .opacity(isEnabled ? 1 : 0.5)
         }
     }
 }

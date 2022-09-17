@@ -69,6 +69,8 @@ struct MainScreenView: View{
                                 deviceModel.write(data: SealConverter.detectionsToCommands(detactions: detections))
                             }
                         }
+                    ).disabled(
+                        detectionResultModel.detections == nil || deviceModel.connectedPeripheral == nil
                     )
                     Spacer()
                 }
