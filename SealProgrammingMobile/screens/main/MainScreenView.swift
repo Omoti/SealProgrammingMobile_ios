@@ -51,14 +51,25 @@ struct MainScreenView: View{
                         }
                     )
                     Spacer()
-                    CircleButton(
-                        image: Image("BluetoothIconDefault"),
-                        label: "つなぐ",
-                        color: Color("PrimaryColor"),
-                        action: {
-                            showingDeviceScreenView = true
-                        }
-                    )
+                    if deviceModel.connectedPeripheral == nil {
+                        CircleButton(
+                            image: Image("BluetoothIconDefault"),
+                            label: "つなぐ",
+                            color: Color("PrimaryColor"),
+                            action: {
+                                showingDeviceScreenView = true
+                            }
+                        )
+                    }else{
+                        CircleButton(
+                            image: Image("BluetoothIconConnected"),
+                            label: "つなぐ",
+                            color: Color("PrimaryColor"),
+                            action: {
+                                showingDeviceScreenView = true
+                            }
+                        )
+                    }
                     Spacer()
                     CircleButton(
                         image:Image(systemName: "car.fill"),
@@ -70,6 +81,15 @@ struct MainScreenView: View{
                             }
                         }
                     )
+                    Spacer()
+                }
+                HStack{
+                    Spacer()
+                    if let device = deviceModel.connectedPeripheral {
+                        Text(device.name + ": OK").foregroundColor(.black)
+                    }else{
+                        Text("つながってません").foregroundColor(.black)
+                    }
                     Spacer()
                 }
             }.fullScreenCover(isPresented:$showingCaptureScreenView) {
