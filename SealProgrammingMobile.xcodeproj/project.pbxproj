@@ -20,6 +20,8 @@
 		67036DA128A89925009E5480 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67036DA028A89925009E5480 /* DeviceModel.swift */; };
 		6705162B28D4B731004CFC98 /* DetectionResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705162A28D4B731004CFC98 /* DetectionResultModel.swift */; };
 		6705162D28D57E6E004CFC98 /* ConnectedDeviceItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705162C28D57E6E004CFC98 /* ConnectedDeviceItem.swift */; };
+		6705162F28D5FFD1004CFC98 /* SealsScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705162E28D5FFD1004CFC98 /* SealsScreenView.swift */; };
+		6705163228D600DD004CFC98 /* SealItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6705163128D600DD004CFC98 /* SealItem.swift */; };
 		671287C528D1E12500643641 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671287C428D1E12500643641 /* CloseButton.swift */; };
 		671287C728D2788400643641 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671287C628D2788400643641 /* IconButton.swift */; };
 		671287CB28D49A4C00643641 /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671287CA28D49A4C00643641 /* UIImageExt.swift */; };
@@ -53,6 +55,8 @@
 		67036DA028A89925009E5480 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		6705162A28D4B731004CFC98 /* DetectionResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionResultModel.swift; sourceTree = "<group>"; };
 		6705162C28D57E6E004CFC98 /* ConnectedDeviceItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceItem.swift; sourceTree = "<group>"; };
+		6705162E28D5FFD1004CFC98 /* SealsScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SealsScreenView.swift; sourceTree = "<group>"; };
+		6705163128D600DD004CFC98 /* SealItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SealItem.swift; sourceTree = "<group>"; };
 		671287C428D1E12500643641 /* CloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		671287C628D2788400643641 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		671287CA28D49A4C00643641 /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
@@ -139,9 +143,19 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		6705163028D5FFDB004CFC98 /* seals */ = {
+			isa = PBXGroup;
+			children = (
+				6705162E28D5FFD1004CFC98 /* SealsScreenView.swift */,
+				6705163128D600DD004CFC98 /* SealItem.swift */,
+			);
+			path = seals;
+			sourceTree = "<group>";
+		};
 		6762E31A28CC917100A2990E /* screens */ = {
 			isa = PBXGroup;
 			children = (
+				6705163028D5FFDB004CFC98 /* seals */,
 				6762E33028CF640600A2990E /* camera */,
 				6762E32128CD5B6600A2990E /* devices */,
 				6762E31D28CC9B3A00A2990E /* main */,
@@ -330,6 +344,7 @@
 				6705162B28D4B731004CFC98 /* DetectionResultModel.swift in Sources */,
 				6762E31C28CC91A700A2990E /* MainScreenView.swift in Sources */,
 				67036D9B28A8558D009E5480 /* DevicesScreenView.swift in Sources */,
+				6705163228D600DD004CFC98 /* SealItem.swift in Sources */,
 				671287C728D2788400643641 /* IconButton.swift in Sources */,
 				6762E33828D1296100A2990E /* ShutterButton.swift in Sources */,
 				671287C528D1E12500643641 /* CloseButton.swift in Sources */,
@@ -338,6 +353,7 @@
 				6762E33228CF642B00A2990E /* CaptureScreenView.swift in Sources */,
 				67036D8728A61345009E5480 /* ImagePickerView.swift in Sources */,
 				6762E32B28CE02B700A2990E /* SealConverter.swift in Sources */,
+				6705162F28D5FFD1004CFC98 /* SealsScreenView.swift in Sources */,
 				67036D7828A4D95D009E5480 /* SealProgrammingMobileApp.swift in Sources */,
 				6762E33628CFED4300A2990E /* CameraManagerl.swift in Sources */,
 				6762E32428CD615400A2990E /* FoundDeviceItem.swift in Sources */,
