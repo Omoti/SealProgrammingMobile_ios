@@ -32,6 +32,13 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
         stopScan()
     }
     
+    func disconnect(){
+        if let peripheral = connectedPeripheral?.peripheral {
+            centralManager.cancelPeripheralConnection(peripheral)
+            connectedPeripheral = nil
+        }
+    }
+    
     func write(data: String){
         let service: CBService? = currentPeripheral?.services?.first
         

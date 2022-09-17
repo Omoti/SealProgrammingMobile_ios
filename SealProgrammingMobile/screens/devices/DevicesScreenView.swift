@@ -16,6 +16,11 @@ struct DeviceScanView: View {
             }.padding(EdgeInsets(top: 10, leading: 10, bottom: 3, trailing: 10))
                 .background(Color("PrimaryColor"))
             List(){
+                if let connectedDevice = deviceModel.connectedPeripheral {
+                    ConnectedDeviceItem(name: connectedDevice.name, action: {
+                        deviceModel.disconnect()
+                    })
+                }
                 ForEach(deviceModel.foundPeripherals, id: \.self) { peripheral in
                     FoundDeviceItem(
                         name:peripheral.name,
