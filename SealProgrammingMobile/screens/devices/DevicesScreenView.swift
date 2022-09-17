@@ -7,7 +7,7 @@ struct DeviceScanView: View {
     var onConnect: () -> Void
     
     var body: some View {
-        VStack{
+        VStack(alignment: .center){
             HStack(alignment: .bottom){
                 Spacer()
                 CloseButton(action: {
@@ -25,6 +25,11 @@ struct DeviceScanView: View {
                         }
                     )
                 }
+                HStack(alignment: .center){
+                    Spacer()
+                    ProgressView("")
+                    Spacer()
+                }.padding(10)
             }
         }.onAppear(){
             deviceModel.startScan()
