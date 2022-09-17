@@ -10,6 +10,8 @@ struct CaptureScreenView: View {
     @StateObject private var camera = CameraModel() // 再描画しても状態を保持
     @StateObject private var sealDetector = SealDetector()
     
+    @State var showingSealsScreenView = false
+    
     var body: some View {
         VStack{
             HStack{
@@ -44,7 +46,7 @@ struct CaptureScreenView: View {
                         image: Image(systemName: "list.bullet"),
                         label: "リスト",
                         action: {
-                            // 一覧表示
+                            showingSealsScreenView = true
                         }
                     )
                     Spacer()
@@ -83,6 +85,9 @@ struct CaptureScreenView: View {
                 }.padding(20)
             }
         }.background(.black)
+            .sheet(isPresented: $showingSealsScreenView){
+                SealsScreenView(seals: [])
+            }
     }
     
     func onCaptured(uiImage: UIImage) {

@@ -1,9 +1,13 @@
 import SwiftUI
 
-struct SealsScreen : View {
+struct SealsScreenView : View {
+    let seals: [Seal]
+    
     var body: some View {
         List(){
-            SealItem(index: 1, seal: Seal.forward)
+            ForEach(seals, id: \.self) { seal in
+                SealItem(index: 1, seal: seal)
+            }
         }
     }
 }
