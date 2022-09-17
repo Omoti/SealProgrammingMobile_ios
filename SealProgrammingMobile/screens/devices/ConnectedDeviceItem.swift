@@ -5,8 +5,13 @@ struct ConnectedDeviceItem: View{
     var action: () -> Void
     
     var body: some View{
-        HStack{
+        HStack(alignment: .center){
             Image("BluetoothIconConnected")
+                .resizable()
+                .renderingMode(.template)
+                .foregroundColor(Color("PrimaryColor"))
+                .scaledToFit()
+                .frame(width: 25, height: 25, alignment: .bottom)
             Text(name).font(.headline)
             Spacer()
             Button(action: action){
