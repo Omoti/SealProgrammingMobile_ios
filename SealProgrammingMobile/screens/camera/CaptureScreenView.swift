@@ -86,7 +86,10 @@ struct CaptureScreenView: View {
             }
         }.background(.black)
             .sheet(isPresented: $showingSealsScreenView){
-                SealsScreenView(seals: [])
+                let seals = sealDetector.detections?.map({ detection in
+                    SealConverter.labelToSeal(label: detection.categories.first?.label ?? "")
+                })
+                SealsScreenView(seals: seals!)
             }
     }
     
