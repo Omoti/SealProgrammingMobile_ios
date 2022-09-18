@@ -45,7 +45,7 @@ struct CaptureScreenView: View {
                         let seals = sealDetector.detections?.map({ detection in
                             SealConverter.labelToSeal(label: detection.categories.first?.label ?? "")
                         })
-                        SealsScreenView(seals: seals!)
+                        SealsScreenView(seals: seals ?? [])
                     }
                 }else{
                     PreviewView(camera: camera, aspectRatio: 3/4)
