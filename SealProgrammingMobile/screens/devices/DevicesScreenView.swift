@@ -7,40 +7,39 @@ struct DeviceScanView: View {
     var onConnect: () -> Void
     
     var body: some View {
-        VStack(alignment: .center){
-            HStack(alignment: .bottom){
-                Spacer()
-                CloseButton(action: {
+        NavigationView{
+            VStack(alignment: .center){
+                List(){
+                    if let connectedDevice = deviceModel.connectedPeripheral {
+                        ConnectedDeviceItem(name: connectedDevice.name, action: {
+                            deviceModel.disconnect()
+                        })
+                    }
+                    ForEach(deviceModel.foundPeripherals, id: \.self) { peripheral in
+                        FoundDeviceItem(
+                            name:peripheral.name,
+                            action: {
+                                deviceModel.connect(peripheral: peripheral)
+                                onConnect()
+                            }
+                        )
+                    }
+                    HStack(alignment: .center){
+                        Spacer()
+                        ProgressView("")
+                        Spacer()
+                    }.padding(10)
+                }
+            }.onAppear(){
+                deviceModel.startScan()
+            }.onDisappear(){
+                deviceModel.stopScan()
+            }.navigationBarTitle("つなぐ")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(trailing: CloseButton(action: {
                     close()
-                })
-            }.padding(EdgeInsets(top: 10, leading: 10, bottom: 3, trailing: 10))
-                .background(Color("PrimaryColor"))
-            List(){
-                if let connectedDevice = deviceModel.connectedPeripheral {
-                    ConnectedDeviceItem(name: connectedDevice.name, action: {
-                        deviceModel.disconnect()
-                    })
-                }
-                ForEach(deviceModel.foundPeripherals, id: \.self) { peripheral in
-                    FoundDeviceItem(
-                        name:peripheral.name,
-                        action: {
-                            deviceModel.connect(peripheral: peripheral)
-                            onConnect()
-                        }
-                    )
-                }
-                HStack(alignment: .center){
-                    Spacer()
-                    ProgressView("")
-                    Spacer()
-                }.padding(10)
-            }
-        }.onAppear(){
-            deviceModel.startScan()
-        }.onDisappear(){
-            deviceModel.stopScan()
-        }.background(Color("PrimaryColor"))
+                }))
+        }
     }
     
     func close(){
