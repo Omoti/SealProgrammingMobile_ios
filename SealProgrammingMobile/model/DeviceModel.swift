@@ -4,7 +4,7 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
     @Published var isSearching: Bool = false
     @Published var foundPeripherals: [Peripheral] = []
     @Published var connectedPeripheral: Peripheral? = nil
-    
+
     private var centralManager: CBCentralManager!
     private var currentPeripheral: CBPeripheral? = nil
     private let serviceUUID: [CBUUID] = [CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")]
@@ -119,6 +119,11 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
             case characteristicUUID.first?.uuidString:
                 print("write:" + writeData)
                 CommandWriter.write(peripheral: peripheral, characteristic: i, commands: writeData)
+                
+                NotificationCenter.default.post(name: Notification.Name("write_completed"),
+                                                object: nil, userInfo: nil)
+
+                print("write: completed")
                 break
             default:
                 break
