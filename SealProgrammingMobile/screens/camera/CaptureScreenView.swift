@@ -114,11 +114,17 @@ struct CaptureScreenView: View {
         }.background(.black)
             .sheet(isPresented: $showingSettings) {
                 CameraSettingsScreenView()
+                    .onDisappear(){
+                        if let image = camera.capturedUiImage {
+                            detectionResultModel.detections = nil
+                            sealDetector.detect(image: image, threshold: settings.threshold)
+                        }
+                    }
             }
     }
     
     func onCaptured(uiImage: UIImage) {
-        sealDetector.detect(image: uiImage)
+        sealDetector.detect(image: uiImage, threshold: settings.threshold)
     }
     
     func close(){

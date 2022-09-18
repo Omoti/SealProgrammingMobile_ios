@@ -5,8 +5,8 @@ import TensorFlowLiteTaskVision
 
 class SealDetector: ObservableObject{
     @Published var detections: [Detection]? = nil
-    
-    func detect(image: UIImage) {
+        
+    func detect(image: UIImage, threshold: Float) {
         // Initialization
         guard let modelPath = Bundle.main.path(forResource: "seals_model",
                                                ofType: "tflite")
@@ -16,7 +16,7 @@ class SealDetector: ObservableObject{
         }
         
         let options = ObjectDetectorOptions(modelPath: modelPath)
-        options.classificationOptions.scoreThreshold = 0.4
+        options.classificationOptions.scoreThreshold = threshold
         
         do{
             // Configure any additional options:
