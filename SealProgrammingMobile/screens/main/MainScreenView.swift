@@ -65,14 +65,14 @@ struct MainScreenView: View{
                         }
                     )
                     Spacer()
-                        CircleButton(
-                            image: Image(deviceModel.connectedPeripheral == nil ? "BluetoothIconDefault": "BluetoothIconConnected"),
-                            label: "つなぐ",
-                            color: Color("PrimaryColor"),
-                            action: {
-                                showingDeviceScreenView = true
-                            }
-                        )
+                    CircleButton(
+                        image: Image(deviceModel.connectedPeripheral == nil ? "BluetoothIconDefault": "BluetoothIconConnected"),
+                        label: "つなぐ",
+                        color: Color("PrimaryColor"),
+                        action: {
+                            showingDeviceScreenView = true
+                        }
+                    )
                     Spacer()
                     CircleButton(
                         image:Image(systemName: "car.fill"),
