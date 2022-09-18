@@ -48,7 +48,15 @@ struct CaptureScreenView: View {
                             SealsScreenView(seals: seals ?? [])
                         }
                     }else{
-                        PreviewView(camera: camera, aspectRatio: 3/4)
+                        // プレビュー
+                        ZStack(alignment: .center){
+                            PreviewView(camera: camera, aspectRatio: 3/4)
+                            Rectangle()
+                                .stroke(lineWidth: 1)
+                                .foregroundColor(.red)
+                                .aspectRatio(2/3, contentMode: .fit)
+                                .padding(20)
+                        }
                     }
                 }.onAppear(){
                     UISegmentedControl.appearance().setTitleTextAttributes(
