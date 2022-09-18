@@ -9,7 +9,7 @@ struct CloseButton: View{
         ){
             Image(systemName: "xmark.circle.fill")
                 .foregroundColor(.white)
-                .font(.system(size: 25))
+                .font(.system(size: 20))
         }
     }
 }
