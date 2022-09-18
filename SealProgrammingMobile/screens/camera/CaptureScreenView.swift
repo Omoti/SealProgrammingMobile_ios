@@ -65,15 +65,7 @@ struct CaptureScreenView: View {
             Spacer()
             if(camera.captured){
                 HStack{
-                    Spacer().overlay(
-                        IconButton(
-                            image: Image(systemName: "camera"),
-                            label: "とりなおす",
-                            action: {
-                                camera.restart()
-                            }
-                        )
-                    )
+                    Spacer()
                     CircleButton(
                         image: Image(systemName: "checkmark"),
                         label: "OK",
@@ -84,7 +76,15 @@ struct CaptureScreenView: View {
                             close()
                         }
                     )
-                    Spacer()
+                    Spacer().overlay(
+                        IconButton(
+                            image: Image(systemName: "camera"),
+                            label: "とりなおす",
+                            action: {
+                                camera.restart()
+                            }
+                        )
+                    )
                 }.padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
             }else{
                 HStack{
