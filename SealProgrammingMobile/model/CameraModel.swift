@@ -79,6 +79,7 @@ class CameraModel : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
         saved = false
         capturedUiImage = nil
         
+        reset()
         setupCaptureSession()
         
         withAnimation{self.captured.toggle()}
