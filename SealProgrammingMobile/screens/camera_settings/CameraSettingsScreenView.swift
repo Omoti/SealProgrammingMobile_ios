@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct CameraSettingsScreenView : View{
-    @ObservedObject var settings = CameraSettings()
+    @EnvironmentObject var settings: CameraSettings
     
     var body: some View {
         VStack{

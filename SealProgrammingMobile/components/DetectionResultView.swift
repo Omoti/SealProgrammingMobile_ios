@@ -4,7 +4,7 @@ import TensorFlowLiteTaskVision
 struct DetectionResultView: View {
     let detections: [Detection]
     let imageSize: CGSize
-    var showScore: Bool = false
+    let showScore: Bool
     
     var body: some View {
         Canvas { context, size in

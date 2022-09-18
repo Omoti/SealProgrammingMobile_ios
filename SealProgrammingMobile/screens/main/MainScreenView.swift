@@ -33,7 +33,7 @@ struct MainScreenView: View{
                                 .frame(maxHeight: .infinity)
                             
                             if let detections = detectionResultModel.detections {
-                                DetectionResultView(detections: detections, imageSize: image.size)
+                                DetectionResultView(detections: detections, imageSize: image.size, showScore: false)
                             }
                         }else{
                             let seals = detectionResultModel.detections?.map({ detection in
@@ -99,6 +99,7 @@ struct MainScreenView: View{
             }.fullScreenCover(isPresented:$showingCaptureScreenView) {
                 CaptureScreenView()
                     .environmentObject(detectionResultModel)
+                    .environmentObject(CameraSettings())
             }.sheet(isPresented: $showingDeviceScreenView) {
                 DeviceScanView(onConnect: {
                     showingDeviceScreenView = false

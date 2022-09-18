@@ -6,6 +6,7 @@ struct CaptureScreenView: View {
     @Environment(\.dismiss) private var dismiss
     
     @EnvironmentObject private var detectionResultModel :DetectionResultModel
+    @EnvironmentObject private var settings: CameraSettings
     
     @StateObject private var camera = CameraModel() // 再描画しても状態を保持
     @StateObject private var sealDetector = SealDetector()
@@ -45,7 +46,11 @@ struct CaptureScreenView: View {
                         
                         // 検出結果を重ねる
                         if sealDetector.detections != nil {
-                            DetectionResultView(detections: sealDetector.detections!, imageSize: camera.capturedUiImage!.size)
+                            DetectionResultView(
+                                detections: sealDetector.detections!,
+                                imageSize: camera.capturedUiImage!.size,
+                                showScore: settings.showScore
+                            )
                         }
                     }else{
                         let seals = sealDetector.detections?.map({ detection in
