@@ -15,112 +15,112 @@ struct CaptureScreenView: View {
     @State private var selection = 0
     
     var body: some View {
-        VStack{
-            HStack{
-                if camera.capturedUiImage != nil {
-                    SettingsButton{
-                        showingSettings = true
-                    }
-                }
-                Spacer()
-                CloseButton(action: {
-                    close()
-                })
-            }.padding(10)
-            
-            Picker("", selection: $selection) {
-                Text("シール").tag(0).foregroundColor(.white)
-                Text("リスト").tag(1).foregroundColor(.white)
-            }.pickerStyle(.segmented)
-                .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
-                .opacity(camera.capturedUiImage != nil ? 1.0 : 0.0)
-            
-            ZStack{
-                // 撮影画像
-                if let image = camera.capturedUiImage {
-                    if selection == 0 {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(maxHeight: .infinity)
-                        
-                        // 検出結果を重ねる
-                        if sealDetector.detections != nil {
-                            DetectionResultView(
-                                detections: sealDetector.detections!,
-                                imageSize: camera.capturedUiImage!.size,
-                                showScore: settings.showScore
-                            )
+        NavigationView{
+            VStack{
+                Picker("", selection: $selection) {
+                    Text("シール").tag(0).foregroundColor(.white)
+                    Text("リスト").tag(1).foregroundColor(.white)
+                }.pickerStyle(.segmented)
+                    .padding(10)
+                    .opacity(camera.capturedUiImage != nil ? 1.0 : 0.0)
+                
+                ZStack{
+                    // 撮影画像
+                    if let image = camera.capturedUiImage {
+                        if selection == 0 {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(maxHeight: .infinity)
+                            
+                            // 検出結果を重ねる
+                            if sealDetector.detections != nil {
+                                DetectionResultView(
+                                    detections: sealDetector.detections!,
+                                    imageSize: camera.capturedUiImage!.size,
+                                    showScore: settings.showScore
+                                )
+                            }
+                        }else{
+                            let seals = sealDetector.detections?.map({ detection in
+                                SealConverter.labelToSeal(label: detection.categories.first?.label ?? "")
+                            })
+                            SealsScreenView(seals: seals ?? [])
                         }
                     }else{
-                        let seals = sealDetector.detections?.map({ detection in
-                            SealConverter.labelToSeal(label: detection.categories.first?.label ?? "")
-                        })
-                        SealsScreenView(seals: seals ?? [])
+                        PreviewView(camera: camera, aspectRatio: 3/4)
                     }
-                }else{
-                    PreviewView(camera: camera, aspectRatio: 3/4)
-                }
-            }.onAppear(){
-                UISegmentedControl.appearance().setTitleTextAttributes(
-                    [.foregroundColor : UIColor.white], for: .normal
-                )
-                UISegmentedControl.appearance().setTitleTextAttributes(
-                    [.foregroundColor : UIColor.black], for: .selected
-                )
-                UISegmentedControl.appearance().backgroundColor = UIColor.darkGray
-                UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.white
-
-                camera.setupCaptureSession()
-            }.aspectRatio(3/4, contentMode: ContentMode.fit)
-            Spacer()
-            if(camera.captured){
-                HStack{
-                    Spacer()
-                    CircleButton(
-                        image: Image(systemName: "checkmark"),
-                        label: "OK",
-                        color: Color("PrimaryColor"),
-                        action: {
-                            detectionResultModel.image = camera.capturedUiImage
-                            detectionResultModel.detections = sealDetector.detections
-                            close()
-                        }
+                }.onAppear(){
+                    UISegmentedControl.appearance().setTitleTextAttributes(
+                        [.foregroundColor : UIColor.white], for: .normal
                     )
-                    Spacer().overlay(
-                        IconButton(
-                            image: Image(systemName: "camera"),
-                            label: "とりなおす",
+                    UISegmentedControl.appearance().setTitleTextAttributes(
+                        [.foregroundColor : UIColor.black], for: .selected
+                    )
+                    UISegmentedControl.appearance().backgroundColor = UIColor.darkGray
+                    UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.white
+                    
+                    camera.setupCaptureSession()
+                }.aspectRatio(3/4, contentMode: ContentMode.fit)
+                Spacer()
+                if(camera.captured){
+                    HStack{
+                        Spacer()
+                        CircleButton(
+                            image: Image(systemName: "checkmark"),
+                            label: "OK",
+                            color: Color("PrimaryColor"),
                             action: {
-                                camera.restart()
+                                detectionResultModel.image = camera.capturedUiImage
+                                detectionResultModel.detections = sealDetector.detections
+                                close()
                             }
                         )
-                    )
-                }.padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
-            }else{
-                HStack{
-                    Spacer()
-                    ShutterButton(action: {
-                        camera.onCaptured = onCaptured
-                        camera.capture()
-                    })
-                    Spacer().overlay(
-                        SwitchCameraButton(action: {
-                            camera.switchPosition()
+                        Spacer().overlay(
+                            IconButton(
+                                image: Image(systemName: "camera"),
+                                label: "とりなおす",
+                                action: {
+                                    camera.restart()
+                                }
+                            )
+                        )
+                    }.padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
+                }else{
+                    HStack{
+                        Spacer()
+                        ShutterButton(action: {
+                            camera.onCaptured = onCaptured
+                            camera.capture()
                         })
-                    )
-                }.padding(20)
-            }
-        }.background(.black)
-            .sheet(isPresented: $showingSettings) {
-                CameraSettingsScreenView()
-                    .onDisappear(){
-                        if let image = camera.capturedUiImage {
-                            detectionResultModel.detections = nil
-                            sealDetector.detect(image: image, threshold: settings.threshold)
+                        Spacer().overlay(
+                            SwitchCameraButton(action: {
+                                camera.switchPosition()
+                            })
+                        )
+                    }.padding(20)
+                }
+            }.background(.black)
+                .navigationBarTitle("とる")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(
+                    leading: ZStack{
+                        SettingsButton{
+                            showingSettings = true
                         }
+                    },
+                    trailing: CloseButton(action: {
+                        close()
+                    }))
+        }.sheet(isPresented: $showingSettings) {
+            CameraSettingsScreenView()
+                .onDisappear(){
+                    if let image = camera.capturedUiImage {
+                        detectionResultModel.detections = nil
+                        sealDetector.detect(image: image, threshold: settings.threshold)
                     }
-            }
+                }
+        }
     }
     
     func onCaptured(uiImage: UIImage) {

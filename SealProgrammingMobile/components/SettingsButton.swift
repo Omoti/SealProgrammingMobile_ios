@@ -9,7 +9,7 @@ struct SettingsButton: View{
         ){
             Image(systemName: "gearshape.fill")
                 .foregroundColor(.white)
-                .font(.system(size: 25))
+                .font(.system(size: 20))
         }
     }
 }
