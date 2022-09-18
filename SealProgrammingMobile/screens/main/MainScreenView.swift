@@ -13,10 +13,15 @@ struct MainScreenView: View{
     
     //@State var pickedImage: UIImage?
     
-    
+    @State private var selection = 0
     var body:some View{
         NavigationView{
             VStack(alignment: .center) {
+                Picker("", selection: $selection) {
+                    Text("シール").tag(0)
+                    Text("リスト").tag(1)
+                }.pickerStyle(.segmented)
+                    .padding(10)
                 ZStack{
                     if let image = detectionResultModel.image {
                         Image(uiImage: image)

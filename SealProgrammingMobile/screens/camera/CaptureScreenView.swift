@@ -10,7 +10,7 @@ struct CaptureScreenView: View {
     @StateObject private var camera = CameraModel() // 再描画しても状態を保持
     @StateObject private var sealDetector = SealDetector()
     
-    @State var showingSealsScreenView = false
+    @State private var selection = 0
     
     var body: some View {
         VStack{
@@ -20,35 +20,51 @@ struct CaptureScreenView: View {
                     close()
                 })
             }.padding(10)
+            
+            Picker("", selection: $selection) {
+                Text("シール").tag(0).foregroundColor(.white)
+                Text("リスト").tag(1).foregroundColor(.white)
+            }.pickerStyle(.segmented)
+                .padding(EdgeInsets(top: 0, leading: 10, bottom: 10, trailing: 10))
+                .opacity(camera.capturedUiImage != nil ? 1.0 : 0.0)
+            
             ZStack{
-                PreviewView(camera: camera, aspectRatio: 3/4)
-                
                 // 撮影画像
                 if let image = camera.capturedUiImage {
-                    Image(uiImage: image)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(maxHeight: .infinity)
-                    
-                    // 検出結果を重ねる
-                    if sealDetector.detections != nil {
-                        DetectionResultView(detections: sealDetector.detections!, imageSize: camera.capturedUiImage!.size)
+                    if selection == 0 {
+                        Image(uiImage: image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(maxHeight: .infinity)
+                        
+                        // 検出結果を重ねる
+                        if sealDetector.detections != nil {
+                            DetectionResultView(detections: sealDetector.detections!, imageSize: camera.capturedUiImage!.size)
+                        }
+                    }else{
+                        let seals = sealDetector.detections?.map({ detection in
+                            SealConverter.labelToSeal(label: detection.categories.first?.label ?? "")
+                        })
+                        SealsScreenView(seals: seals!)
                     }
+                }else{
+                    PreviewView(camera: camera, aspectRatio: 3/4)
                 }
             }.onAppear(){
+                UISegmentedControl.appearance().setTitleTextAttributes(
+                    [.foregroundColor : UIColor.white], for: .normal
+                )
+                UISegmentedControl.appearance().setTitleTextAttributes(
+                    [.foregroundColor : UIColor.black], for: .selected
+                )
+                UISegmentedControl.appearance().backgroundColor = UIColor.darkGray
+                UISegmentedControl.appearance().selectedSegmentTintColor = UIColor.white
+
                 camera.setupCaptureSession()
             }.aspectRatio(3/4, contentMode: ContentMode.fit)
             Spacer()
             if(camera.captured){
                 HStack{
-                    Spacer()
-                    IconButton(
-                        image: Image(systemName: "list.bullet"),
-                        label: "リスト",
-                        action: {
-                            showingSealsScreenView = true
-                        }
-                    )
                     Spacer()
                     CircleButton(
                         image: Image(systemName: "checkmark"),
@@ -60,15 +76,15 @@ struct CaptureScreenView: View {
                             close()
                         }
                     )
-                    Spacer()
-                    IconButton(
-                        image: Image(systemName: "camera"),
-                        label: "とりなおす",
-                        action: {
-                            camera.restart()
-                        }
+                    Spacer().overlay(
+                        IconButton(
+                            image: Image(systemName: "camera"),
+                            label: "とりなおす",
+                            action: {
+                                camera.restart()
+                            }
+                        )
                     )
-                    Spacer()
                 }.padding(EdgeInsets(top: 20, leading: 0, bottom: 20, trailing: 0))
             }else{
                 HStack{
@@ -85,12 +101,6 @@ struct CaptureScreenView: View {
                 }.padding(20)
             }
         }.background(.black)
-            .sheet(isPresented: $showingSealsScreenView){
-                let seals = sealDetector.detections?.map({ detection in
-                    SealConverter.labelToSeal(label: detection.categories.first?.label ?? "")
-                })
-                SealsScreenView(seals: seals!)
-            }
     }
     
     func onCaptured(uiImage: UIImage) {
