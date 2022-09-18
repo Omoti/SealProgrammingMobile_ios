@@ -21,17 +21,25 @@ struct MainScreenView: View{
                     Text("シール").tag(0)
                     Text("リスト").tag(1)
                 }.pickerStyle(.segmented)
-                    .padding(10)
+                    .padding(EdgeInsets(top: 10, leading: 10, bottom: 5, trailing: 10))
+                    .opacity(detectionResultModel.image != nil ? 1.0 : 0.0)
                 ZStack{
                     if let image = detectionResultModel.image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .background(Color.white)
-                            .frame(maxHeight: .infinity)
-                        
-                        if let detections = detectionResultModel.detections {
-                            DetectionResultView(detections: detections, imageSize: image.size)
+                        if selection == 0 {
+                            Image(uiImage: image)
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .background(Color.white)
+                                .frame(maxHeight: .infinity)
+                            
+                            if let detections = detectionResultModel.detections {
+                                DetectionResultView(detections: detections, imageSize: image.size)
+                            }
+                        }else{
+                            let seals = detectionResultModel.detections?.map({ detection in
+                                SealConverter.labelToSeal(label: detection.categories.first?.label ?? "")
+                            })
+                            SealsScreenView(seals: seals!)
                         }
                     }else{
                         VStack{
