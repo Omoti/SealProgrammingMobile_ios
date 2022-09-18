@@ -10,11 +10,17 @@ struct CaptureScreenView: View {
     @StateObject private var camera = CameraModel() // 再描画しても状態を保持
     @StateObject private var sealDetector = SealDetector()
     
+    @State var showingSettings = false
     @State private var selection = 0
     
     var body: some View {
         VStack{
             HStack{
+                if camera.capturedUiImage != nil {
+                    SettingsButton{
+                        showingSettings = true
+                    }
+                }
                 Spacer()
                 CloseButton(action: {
                     close()
@@ -101,6 +107,9 @@ struct CaptureScreenView: View {
                 }.padding(20)
             }
         }.background(.black)
+            .sheet(isPresented: $showingSettings) {
+                CameraSettingsScreenView()
+            }
     }
     
     func onCaptured(uiImage: UIImage) {
