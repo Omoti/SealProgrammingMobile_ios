@@ -7,8 +7,12 @@ struct CameraSettingsScreenView : View{
         VStack{
             HStack{
                 Form {
-                    Toggle(isOn: $settings.showScore) {
-                        Text("検出結果の信頼度(%)を表示")
+                    Section(){
+                        Toggle(isOn: $settings.showScore) {
+                            Text("検出結果の信頼度(%)を表示")
+                        }
+                    } header : {
+                        Text("表示設定")
                     }
                 }
             }
