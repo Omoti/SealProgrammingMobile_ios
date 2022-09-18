@@ -3,10 +3,18 @@ import SwiftUI
 struct AppInfoScreenView : View{
     @Binding var isPresented: Bool
     
+    let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? ""
+        
     var body: some View {
         NavigationView{
             VStack{
-                Text("a")
+                Form{
+                    HStack{
+                        Text("バージョン")
+                        Spacer()
+                        Text(version)
+                    }   
+                }
             }
             .navigationBarTitle("アプリ情報")
             .navigationBarTitleDisplayMode(.inline)
