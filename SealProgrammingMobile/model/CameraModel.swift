@@ -78,13 +78,10 @@ class CameraModel : NSObject, ObservableObject, AVCapturePhotoCaptureDelegate{
     func restart(){
         saved = false
         capturedUiImage = nil
-        DispatchQueue.global(qos: .background).async {
-            self.captureSession.startRunning()
-            
-            DispatchQueue.main.async {
-                withAnimation{self.captured.toggle()}
-            }
-        }
+        
+        setupCaptureSession()
+        
+        withAnimation{self.captured.toggle()}
     }
     
     func photoOutput(_ _output:AVCapturePhotoOutput,didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?){
