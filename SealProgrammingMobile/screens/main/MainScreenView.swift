@@ -10,6 +10,7 @@ struct MainScreenView: View{
     @State var showingCameraPicker = false
     @State var showingCaptureScreenView = false
     @State var showingDeviceScreenView = false
+    @State var showingAppInfoScreenView = false
     @State var showingPopUp = false
     
     //@State var pickedImage: UIImage?
@@ -106,6 +107,8 @@ struct MainScreenView: View{
                 DeviceScanView(onConnect: {
                     showingDeviceScreenView = false
                 }).environmentObject(deviceModel)
+            }.sheet(isPresented: $showingAppInfoScreenView) {
+                AppInfoScreenView(isPresented: $showingAppInfoScreenView)
             }.alert("プログラムをおくりました！", isPresented: $showingPopUp){
                 Button("OK"){
                     showingPopUp = false
@@ -116,6 +119,11 @@ struct MainScreenView: View{
                 .background(Color("ControlBackgroundColor"))
                 .navigationBarTitle("シールプログラミング")
                 .navigationBarTitleDisplayMode(.inline)
+                .navigationBarItems(trailing: 
+                    InfoButton {
+                        showingAppInfoScreenView = true
+                    }
+                )
         }
     }
 }
