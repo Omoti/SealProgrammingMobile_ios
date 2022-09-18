@@ -33,15 +33,22 @@ struct DetectionResultView: View {
                 
                 guard let category = detection.categories.first  else {continue}
                 let seal = SealConverter.labelToSeal(label: category.label ?? "")
-                let score = String(format: "%.2f", category.score)
-                var text: String  = String(index + 1) + "." + seal.text
-                if showScore {
-                    text += "(" + score + ")"
-                }
+                let text: String  = String(index + 1) + "." + seal.text
+                
                 context.draw(Text(text)
                     .font(.footnote)
                     .foregroundColor(.yellow)
-                , at: CGPoint(x: x  + convertedRect.width / 2, y: y + convertedRect.height /  3))
+                , at: CGPoint(x: x  + convertedRect.width / 2, y: y + convertedRect.height / 3))
+                
+                if showScore {
+                    let score = String(format: "%d", Int(category.score * 100))
+                    
+                    context.draw(Text(score + "%")
+                        .font(.footnote)
+                        .foregroundColor(.yellow)
+                    , at: CGPoint(x: x  + convertedRect.width / 2, y: y + convertedRect.height / 3 * 2))
+                    
+                }
             }
         }
     }
