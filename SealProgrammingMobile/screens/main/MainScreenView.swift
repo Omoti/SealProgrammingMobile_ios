@@ -10,6 +10,7 @@ struct MainScreenView: View{
     @State var showingCameraPicker = false
     @State var showingCaptureScreenView = false
     @State var showingDeviceScreenView = false
+    @State var showingPopUp = false
     
     //@State var pickedImage: UIImage?
     
@@ -81,6 +82,7 @@ struct MainScreenView: View{
                             if let detections = detectionResultModel.detections {
                                 deviceModel.write(data: SealConverter.detectionsToCommands(detactions: detections))
                             }
+                            showingPopUp = true
                         }
                     ).disabled(
                         detectionResultModel.detections == nil || deviceModel.connectedPeripheral == nil
@@ -104,6 +106,10 @@ struct MainScreenView: View{
                 DeviceScanView(onConnect: {
                     showingDeviceScreenView = false
                 }).environmentObject(deviceModel)
+            }.alert("プログラムをおくりました！", isPresented: $showingPopUp){
+                Button("OK"){
+                    showingPopUp = false
+                }
             }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 .background(Color("ControlBackgroundColor"))
                 .navigationBarTitle("シールプログラミング")
