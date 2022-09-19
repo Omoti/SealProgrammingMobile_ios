@@ -12,12 +12,16 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
     private var writeData: String = ""
     private var scanTimer :Timer?
     
+    override init() {
+        super.init()
+        centralManager = CBCentralManager(delegate: self, queue: nil)
+    }
+    
     func startScan() {
         print("# Start Scan")
         foundPeripherals.removeAll()
         isSearching = true
-        centralManager = CBCentralManager(delegate: self, queue: nil)
-        
+
         scanTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { _ in
             print("# fire timer")
             self.stopScan()
