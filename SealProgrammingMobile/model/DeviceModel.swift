@@ -1,24 +1,32 @@
 import CoreBluetooth
+import Combine
 
 class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     @Published var isSearching: Bool = false
     @Published var foundPeripherals: [Peripheral] = []
     @Published var connectedPeripheral: Peripheral? = nil
-
     private var centralManager: CBCentralManager!
     private var currentPeripheral: CBPeripheral? = nil
     private let serviceUUID: [CBUUID] = [CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")]
     private let characteristicUUID: [CBUUID] = [CBUUID(string: "6E400002-B5A3-F393-E0A9-E50E24DCCA9E")] //RX
     private var writeData: String = ""
-
+    private var scanTimer :Timer?
+    
     func startScan() {
         print("# Start Scan")
         foundPeripherals.removeAll()
         isSearching = true
         centralManager = CBCentralManager(delegate: self, queue: nil)
+        
+        scanTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { _ in
+            print("# fire timer")
+            self.stopScan()
+        }
     }
-    
+
     func stopScan(){
+        scanTimer?.invalidate()
+        
         //disconnectPeripheral()
         centralManager?.stopScan()
         print("# Stop Scan")
@@ -122,7 +130,7 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
                 
                 NotificationCenter.default.post(name: Notification.Name("write_completed"),
                                                 object: nil, userInfo: nil)
-
+                
                 print("write: completed")
                 break
             default:
