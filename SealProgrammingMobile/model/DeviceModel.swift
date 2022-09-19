@@ -55,6 +55,9 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
         if let peripheral = connectedPeripheral?.peripheral {
             centralManager.cancelPeripheralConnection(peripheral)
             connectedPeripheral = nil
+
+            centralManager = CBCentralManager(delegate: self, queue: nil)
+            
         }
     }
     
