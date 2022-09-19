@@ -43,6 +43,7 @@
 		6762E33628CFED4300A2990E /* CameraModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6762E33528CFED4300A2990E /* CameraModel.swift */; };
 		6762E33828D1296100A2990E /* ShutterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6762E33728D1296100A2990E /* ShutterButton.swift */; };
 		6762E33A28D13C0300A2990E /* SwitchCameraButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6762E33928D13C0300A2990E /* SwitchCameraButton.swift */; };
+		6781764528D7F12500CEC297 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6781764428D7F12500CEC297 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +84,7 @@
 		6762E33528CFED4300A2990E /* CameraModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraModel.swift; sourceTree = "<group>"; };
 		6762E33728D1296100A2990E /* ShutterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShutterButton.swift; sourceTree = "<group>"; };
 		6762E33928D13C0300A2990E /* SwitchCameraButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCameraButton.swift; sourceTree = "<group>"; };
+		6781764428D7F12500CEC297 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		B6287EAA0DA1B44B7CAD1FBA /* Pods-SealProgrammingMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SealProgrammingMobile.release.xcconfig"; path = "Target Support Files/Pods-SealProgrammingMobile/Pods-SealProgrammingMobile.release.xcconfig"; sourceTree = "<group>"; };
 		B8D5736267ECB38B8BE73CB6 /* Pods_SealProgrammingMobile.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SealProgrammingMobile.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E73F4DED78734F482E825303 /* Pods-SealProgrammingMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SealProgrammingMobile.debug.xcconfig"; path = "Target Support Files/Pods-SealProgrammingMobile/Pods-SealProgrammingMobile.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		67036D6B28A4D95D009E5480 = {
 			isa = PBXGroup;
 			children = (
+				6781764428D7F12500CEC297 /* Settings.bundle */,
 				67036D9628A7AF8A009E5480 /* efficientdet_lite0.tflite */,
 				67036D8C28A62E1F009E5480 /* seals_model.tflite */,
 				67036D7628A4D95D009E5480 /* SealProgrammingMobile */,
@@ -277,6 +280,7 @@
 				67036D7028A4D95D009E5480 /* Sources */,
 				67036D7128A4D95D009E5480 /* Frameworks */,
 				67036D7228A4D95D009E5480 /* Resources */,
+				6781764328D7F10900CEC297 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -327,6 +331,7 @@
 			files = (
 				67036D9728A7AF8A009E5480 /* efficientdet_lite0.tflite in Resources */,
 				67036D8D28A62E1F009E5480 /* seals_model.tflite in Resources */,
+				6781764528D7F12500CEC297 /* Settings.bundle in Resources */,
 				67036D7F28A4D965009E5480 /* Preview Assets.xcassets in Resources */,
 				67036D7C28A4D965009E5480 /* Assets.xcassets in Resources */,
 			);
@@ -356,6 +361,23 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		6781764328D7F10900CEC297 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ $CONFIGURATION = \"Debug\" ]; then\n    ${PODS_ROOT}/LicensePlist/license-plist --output-path $PROJECT_NAME/Settings.bundle\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

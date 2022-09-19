@@ -1,0 +1,13 @@
+name: LicensePlist, nameSpecified: 
+body: MIT License
+
+Copyrig…
+version: 3.22.5
+
+name: TensorFlowLiteTaskVision, nameSpecified: 
+body: Copyright 2020 The T…
+version: 0.4.1
+
+add-version-numbers: false
+
+LicensePlist Version: 3.22.5
