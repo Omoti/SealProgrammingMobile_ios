@@ -44,11 +44,8 @@ struct MainScreenView: View{
                             SealsScreenView(seals: seals!)
                         }
                     }else{
-                        VStack{
-                            Spacer()
-                            Text("シールプログラミングへようこそ")
-                            Spacer()
-                        }.background(Color.white)
+                        OnboardingView()
+                            .background(Color.white)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                     }
                 }.aspectRatio(3/4, contentMode: ContentMode.fit)
