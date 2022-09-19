@@ -3,14 +3,14 @@ import Foundation
 class DeviceSettings : ObservableObject{
     let userDefaults = UserDefaults.standard
     
-    // 最後に接続したペリフェラルのRSSI
-    @Published var lastRssi: String? {
+    // 最後に接続したペリフェラルのUUID
+    @Published var lastUUID: String? {
         didSet {
-            userDefaults.set(lastRssi, forKey: "last_rssi")
+            userDefaults.set(lastUUID, forKey: "last_uuid")
         }
     }
 
     init() {
-        lastRssi = userDefaults.string(forKey: "last_rssi")
+        lastUUID = userDefaults.string(forKey: "last_uuid")
     }
 }
