@@ -7,4 +7,7 @@ target 'SealProgrammingMobile' do
 
   # Pods for SealProgrammingMobile
   pod 'TensorFlowLiteTaskVision'
+  
+  # License
+  pod 'LicensePlist'
 end

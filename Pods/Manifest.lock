@@ -1,16 +1,20 @@
 PODS:
+  - LicensePlist (3.22.5)
   - TensorFlowLiteTaskVision (0.4.1)
 
 DEPENDENCIES:
+  - LicensePlist
   - TensorFlowLiteTaskVision
 
 SPEC REPOS:
   trunk:
+    - LicensePlist
     - TensorFlowLiteTaskVision
 
 SPEC CHECKSUMS:
+  LicensePlist: 17d17753faf90d41ace5b3ca0538f81e7407db58
   TensorFlowLiteTaskVision: 3eca550fd6d3dd815569e3f0cba8ae9c71a90d2e
 
-PODFILE CHECKSUM: 1425a793281f52ff3a637b59dcf10642f8600c58
+PODFILE CHECKSUM: 11fcecf9a6cf32e1cf83218b3d1030acabe30aaa
 
 COCOAPODS: 1.11.3
