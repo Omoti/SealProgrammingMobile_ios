@@ -2,9 +2,13 @@ import CoreBluetooth
 import Combine
 
 class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+    
     @Published var isSearching: Bool = false
     @Published var foundPeripherals: [Peripheral] = []
     @Published var connectedPeripheral: Peripheral? = nil
+    @Published var lastUUID: String? = nil
+    
+    private let settings = DeviceSettings()
     private var centralManager: CBCentralManager!
     private var currentPeripheral: CBPeripheral? = nil
     private let serviceUUID: [CBUUID] = [CBUUID(string: "6E400001-B5A3-F393-E0A9-E50E24DCCA9E")]
@@ -15,6 +19,7 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
     override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil)
+        lastUUID = self.settings.lastUUID
     }
     
     func startScan() {
@@ -42,6 +47,8 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
         connectedPeripheral = peripheral
         centralManager.connect(currentPeripheral!)
         stopScan()
+        
+        settings.lastUUID = peripheral.uuid
     }
     
     func disconnect(){
@@ -102,6 +109,11 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
         } else {
             foundPeripherals.append(foundPeripheral)
             print("found peripheral" + _name)
+            
+            // 自動接続
+            if foundPeripheral.uuid == lastUUID && connectedPeripheral == nil {
+                connect(peripheral: foundPeripheral)
+            }
         }
     }
     
