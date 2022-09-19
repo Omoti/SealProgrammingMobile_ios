@@ -26,19 +26,33 @@ struct DeviceScanView: View {
                     }
                     HStack(alignment: .center){
                         Spacer()
-                        ProgressView("")
+                        if deviceModel.isSearching {
+                            ProgressView()
+                        } else {
+                            VStack(alignment: .center){
+                                if deviceModel.foundPeripherals.count == 0 {
+                                    Text("みつかりませんでした")
+                                        .padding(10)
+                                }
+                                Button {
+                                    deviceModel.startScan()
+                                } label: {
+                                    Text("もういちどさがす")
+                                }.padding(10)
+                            }
+                        }
                         Spacer()
                     }.padding(10)
-                }
-            }.onAppear(){
-                deviceModel.startScan()
-            }.onDisappear(){
-                deviceModel.stopScan()
-            }.navigationBarTitle("つなぐ")
-                .navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(trailing: CloseButton(action: {
-                    close()
-                }))
+                }.onAppear(){
+                    deviceModel.startScan()
+                }.onDisappear(){
+                    deviceModel.stopScan()
+                }.navigationBarTitle("つなぐ")
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarItems(trailing: CloseButton(action: {
+                        close()
+                    }))
+            }
         }
     }
     
