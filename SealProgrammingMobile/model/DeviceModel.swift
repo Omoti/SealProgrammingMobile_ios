@@ -35,11 +35,11 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
 
     func stopScan(){
         scanTimer?.invalidate()
-        
-        //disconnectPeripheral()
+
         centralManager?.stopScan()
-        print("# Stop Scan")
         isSearching = false
+        
+        print("# Stop Scan")
     }
     
     func connect(peripheral: Peripheral){
@@ -96,7 +96,6 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
                                                      uuid: peripheral.identifier.uuidString,
                                                      discoverCount: 0,
                                                      peripheral: peripheral)
-        
         // 50回に一回検出
         if let index = foundPeripherals.firstIndex(where: { $0.uuid == peripheral.identifier.uuidString }) {
             if foundPeripherals[index].discoverCount % 50 == 0 {
@@ -108,7 +107,7 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
             }
         } else {
             foundPeripherals.append(foundPeripheral)
-            print("found peripheral" + _name)
+            print("found peripheral:" + _name)
             
             // 自動接続
             if foundPeripheral.uuid == lastUUID && connectedPeripheral == nil {
