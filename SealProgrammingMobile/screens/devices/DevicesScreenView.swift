@@ -39,7 +39,7 @@ struct DeviceScanView: View {
                                         .padding(10)
                                 }
                                 Button {
-                                    deviceModel.startScan()
+                                    deviceModel.startScan(autoConnect: false)
                                 } label: {
                                     Text("もういちどさがす")
                                 }.padding(10)
@@ -48,7 +48,7 @@ struct DeviceScanView: View {
                         Spacer()
                     }.padding(10)
                 }.onAppear(){
-                    deviceModel.startScan()
+                    deviceModel.startScan(autoConnect: false)
                 }.onDisappear(){
                     deviceModel.stopScan()
                 }.navigationBarTitle("つなぐ")

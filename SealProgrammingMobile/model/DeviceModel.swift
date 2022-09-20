@@ -16,21 +16,32 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
     private var writeData: String = ""
     private var scanTimer :Timer?
     
+    private var autoConnect = true
+    
     override init() {
         super.init()
         lastUUID = self.settings.lastUUID
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
-    func startScan() {
-        print("# Start Scan")
+    func startScan(autoConnect: Bool) {
+        print("# Scanning")
+        self.autoConnect = autoConnect
+        
         foundPeripherals.removeAll()
 
-        isSearching = true
-
-        scanTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { _ in
-            print("# fire timer")
-            self.stopScan()
+        if centralManager.state == .poweredOn {
+            // 重複を無視する
+            let scanOption = [CBCentralManagerScanOptionAllowDuplicatesKey: false]
+            centralManager?.scanForPeripherals(withServices: nil, options: scanOption)
+            isSearching = true
+            
+            scanTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { _ in
+                print("# fire timer")
+                self.stopScan()
+            }
+        } else {
+            print("Cannot Start Scan")
         }
     }
 
@@ -57,6 +68,7 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
             centralManager.cancelPeripheralConnection(peripheral)
             connectedPeripheral = nil
             settings.lastUUID = nil
+            lastUUID = nil
             
             centralManager = CBCentralManager(delegate: self, queue: nil)
         }
@@ -73,11 +85,8 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
     
     func centralManagerDidUpdateState(_ central: CBCentralManager){
         guard central.state == .poweredOn else { return }
-        
-        // 重複を無視する
-        let scanOption = [CBCentralManagerScanOptionAllowDuplicatesKey: false]
-        centralManager?.scanForPeripherals(withServices: nil, options: scanOption)
-        isSearching = true
+                
+        startScan(autoConnect: true)
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber){
@@ -104,8 +113,10 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
         print("found peripheral:" + _name)
         
         // 自動接続
-        if foundPeripheral.uuid == lastUUID && connectedPeripheral == nil {
-            connect(peripheral: foundPeripheral)
+        if autoConnect {
+            if foundPeripheral.uuid == lastUUID && connectedPeripheral == nil {
+                connect(peripheral: foundPeripheral)
+            }
         }
     }
     

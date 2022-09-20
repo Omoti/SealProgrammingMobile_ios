@@ -112,10 +112,6 @@ struct MainScreenView: View{
                 }
             }.onReceive(NotificationCenter.default.publisher(for: Notification.Name("write_completed"))) { notification in
                 showingPopUp = true
-            }.onAppear(){
-                if deviceModel.lastUUID != nil {
-                    deviceModel.startScan()
-                }
             }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                 .background(Color("ControlBackgroundColor"))
                 .navigationBarTitle("シールプログラミング")
