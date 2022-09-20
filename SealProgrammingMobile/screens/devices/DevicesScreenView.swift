@@ -10,19 +10,23 @@ struct DeviceScanView: View {
         NavigationView{
             VStack(alignment: .center){
                 List(){
-                    if let connectedDevice = deviceModel.connectedPeripheral {
-                        ConnectedDeviceItem(name: connectedDevice.name, action: {
+                    let connectedDevice = deviceModel.connectedPeripheral
+                    
+                    if connectedDevice != nil  {
+                        ConnectedDeviceItem(name: connectedDevice!.name, action: {
                             deviceModel.disconnect()
                         })
                     }
                     ForEach(deviceModel.foundPeripherals, id: \.self) { peripheral in
-                        FoundDeviceItem(
-                            name:peripheral.name,
-                            action: {
-                                deviceModel.connect(peripheral: peripheral)
-                                onConnect()
-                            }
-                        )
+                        if peripheral.uuid != connectedDevice?.uuid {
+                            FoundDeviceItem(
+                                name:peripheral.name,
+                                action: {
+                                    deviceModel.connect(peripheral: peripheral)
+                                    onConnect()
+                                }
+                            )
+                        }
                     }
                     HStack(alignment: .center){
                         Spacer()
@@ -30,7 +34,7 @@ struct DeviceScanView: View {
                             ProgressView()
                         } else {
                             VStack(alignment: .center){
-                                if deviceModel.foundPeripherals.count == 0 {
+                                if deviceModel.foundPeripherals.count == 0 && deviceModel.connectedPeripheral == nil {
                                     Text("みつかりませんでした")
                                         .padding(10)
                                 }

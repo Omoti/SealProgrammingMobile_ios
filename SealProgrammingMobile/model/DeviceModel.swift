@@ -18,13 +18,14 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
     
     override init() {
         super.init()
-        centralManager = CBCentralManager(delegate: self, queue: nil)
         lastUUID = self.settings.lastUUID
+        centralManager = CBCentralManager(delegate: self, queue: nil)
     }
     
     func startScan() {
         print("# Start Scan")
         foundPeripherals.removeAll()
+
         isSearching = true
 
         scanTimer = Timer.scheduledTimer(withTimeInterval: 10, repeats: false) { _ in
@@ -38,10 +39,10 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
 
         centralManager?.stopScan()
         isSearching = false
-        
+
         print("# Stop Scan")
     }
-    
+
     func connect(peripheral: Peripheral){
         currentPeripheral = peripheral.peripheral
         connectedPeripheral = peripheral
@@ -55,9 +56,9 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
         if let peripheral = connectedPeripheral?.peripheral {
             centralManager.cancelPeripheralConnection(peripheral)
             connectedPeripheral = nil
-
-            centralManager = CBCentralManager(delegate: self, queue: nil)
+            settings.lastUUID = nil
             
+            centralManager = CBCentralManager(delegate: self, queue: nil)
         }
     }
     
@@ -73,8 +74,8 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
     func centralManagerDidUpdateState(_ central: CBCentralManager){
         guard central.state == .poweredOn else { return }
         
-        // Start advertising this device as a peripheral
-        let scanOption = [CBCentralManagerScanOptionAllowDuplicatesKey: true]
+        // 重複を無視する
+        let scanOption = [CBCentralManagerScanOptionAllowDuplicatesKey: false]
         centralManager?.scanForPeripherals(withServices: nil, options: scanOption)
         isSearching = true
     }
@@ -97,25 +98,14 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
         let foundPeripheral: Peripheral = Peripheral(name: _name,
                                                      rssi: RSSI.intValue,
                                                      uuid: peripheral.identifier.uuidString,
-                                                     discoverCount: 0,
                                                      peripheral: peripheral)
-        // 50回に一回検出
-        if let index = foundPeripherals.firstIndex(where: { $0.uuid == peripheral.identifier.uuidString }) {
-            if foundPeripherals[index].discoverCount % 50 == 0 {
-                foundPeripherals[index].name = _name
-                foundPeripherals[index].rssi = RSSI.intValue
-                foundPeripherals[index].discoverCount += 1
-            } else {
-                foundPeripherals[index].discoverCount += 1
-            }
-        } else {
-            foundPeripherals.append(foundPeripheral)
-            print("found peripheral:" + _name)
-            
-            // 自動接続
-            if foundPeripheral.uuid == lastUUID && connectedPeripheral == nil {
-                connect(peripheral: foundPeripheral)
-            }
+        
+        foundPeripherals.append(foundPeripheral)
+        print("found peripheral:" + _name)
+        
+        // 自動接続
+        if foundPeripheral.uuid == lastUUID && connectedPeripheral == nil {
+            connect(peripheral: foundPeripheral)
         }
     }
     
