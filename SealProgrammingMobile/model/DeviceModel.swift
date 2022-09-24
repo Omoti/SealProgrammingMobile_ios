@@ -86,7 +86,7 @@ class DeviceModel: NSObject, ObservableObject, CBCentralManagerDelegate, CBPerip
     func centralManagerDidUpdateState(_ central: CBCentralManager){
         guard central.state == .poweredOn else { return }
                 
-        startScan(autoConnect: true)
+        startScan(autoConnect: false) // disable auto scan
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber){
