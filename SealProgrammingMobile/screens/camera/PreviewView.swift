@@ -10,19 +10,25 @@ struct PreviewView: UIViewRepresentable {
         let screen = UIScreen.main.bounds
         let frame = CGRect(x: screen.minX, y: screen.minY, width: screen.width, height: screen.width / aspectRatio)
         let view = UIView(frame: frame)
-        camera.preview = AVCaptureVideoPreviewLayer(session: camera.captureSession)
-        camera.preview.frame = view.frame
         
-        camera.preview.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(camera.preview)
-        
-        camera.captureSession.startRunning()
+        DispatchQueue.main.async {
+            camera.preview = AVCaptureVideoPreviewLayer(session: camera.captureSession)
+            camera.preview.frame = view.frame
+            camera.preview.videoGravity = .resizeAspectFill
+            view.layer.addSublayer(camera.preview)
+            
+            DispatchQueue.global(qos: .background).async {
+                camera.captureSession.startRunning()
+            }
+        }
         
         return view
     }
 
     func updateUIView(_ uiView: UIView, context: Context) {
-        camera.preview.frame = uiView.frame
-        print(camera.preview.frame)
+        DispatchQueue.main.async {
+            camera.preview.frame = uiView.frame
+            print(camera.preview.frame)
+        }
     }
 }
